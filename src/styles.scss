@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #282829;
+  color: #cccccc;
+}
+
+.container {
+  width: 1100px;
+  height: 768px;
+  flex-grow: 0;
+  padding: 0 0 194px;
+  background-color: #282829;
+}
