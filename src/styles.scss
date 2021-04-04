@@ -1,8 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
+$primary-color: #1f8fce;
+$secondary-color: #606060;
+$font-family: Roboto;
+$dark-background: #282829;
+$text-color: #cccccc;
 body {
-  background-color: #282829;
-  color: #cccccc;
+  background-color: $dark-background;
+  color: $text-color;
+  font-family: $font-family;
 }
 
 .container {
