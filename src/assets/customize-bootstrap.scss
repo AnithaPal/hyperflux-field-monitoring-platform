@@ -1,0 +1,12 @@
+$primary-color: #1f8fce;
+$secondary-color: #606060;
+
+$theme-colors: (
+  "primary": #1f8fce,
+  "danger": #f47e7e,
+);
+
+.alert-danger{
+  background-color: #f47e7e;
+}
+
