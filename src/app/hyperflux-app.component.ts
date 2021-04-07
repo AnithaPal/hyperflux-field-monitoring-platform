@@ -3,8 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'hyperflux-app',
   template: `<div>
-                <h1> Hyperflux </h1>
-                <registration> </registration>
+                <router-outlet></router-outlet>
             </div>`,
   styleUrls: ['./hyperflux-app.component.scss']
 })
