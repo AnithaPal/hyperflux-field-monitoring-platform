@@ -1,7 +1,6 @@
+@import './assets/customize-bootstrap.scss';
+ @import '../node_modules/bootstrap/scss/bootstrap';
 /* You can add global styles to this file, and also import other style files */
-
-$primary-color: #1f8fce;
-$secondary-color: #606060;
 $font-family: Roboto;
 $dark-background: #282829;
 $text-color: #cccccc;
@@ -18,3 +17,6 @@ body {
   padding: 0 0 194px;
   background-color: #282829;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
