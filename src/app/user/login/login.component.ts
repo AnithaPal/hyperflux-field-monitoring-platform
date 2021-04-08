@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
-import { IUser } from '../user.model';
+import { IUser, ITeam } from '../user.model';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   securityToken: string;
-  securityExpiration: string;
-  teamId: number;
+  securityExpiration: Date;
+  team: ITeam;
   currentUser: IUser;
 
   constructor(private auth: AuthenticationService, private router: Router){
@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
     this.auth.loginUser(formValues).subscribe(
       data => {
         console.log(data);
-        this.currentUser = < IUser> data;
+        this.currentUser =  data as IUser;
         localStorage.setItem('user', JSON.stringify(this.currentUser));
         this.securityToken = data.securityToken;
         this.securityExpiration = data.securityTokenExpiration;
-        this.teamId = data.team;
+        this.team = data.team as ITeam;
       },
       error => {
         console.error(error);

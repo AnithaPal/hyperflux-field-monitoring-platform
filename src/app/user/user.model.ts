@@ -3,8 +3,8 @@ export interface IUser {
   displayName: string;
   email:	string;
   password:	string;
-  securityToken:string;
-  securityTokenExpiration:Date;
+  securityToken: string;
+  securityTokenExpiration: Date;
   team:	ITeam;
   role:	string;
   createdAt:	Date;
