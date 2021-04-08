@@ -4,8 +4,8 @@
       <header> </header>
     </div>
   </div>
-  <div class="row http-response-message">
-    <div class="col-md-8 text-center ">
+  <div class="row  text-center http-response-message">
+    <div class="col-lg-8 margin-center">
         <span class="col text-center alert alert-danger" role="alert" *ngIf="errorMessage?.length > 0">{{ errorMessage }}</span>
     </div>
   </div>
@@ -52,7 +52,8 @@
         </div>
       </div>
       <div class="col text-center login-link">
-        <p>Already have an account <span> <a class="login"> Login Here </a> </span></p>
+        <p>Already have an account <span> <a class="login" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"   routerLink="/login"> Login Here </a> </span></p>
       </div>
     </form>
 </div>

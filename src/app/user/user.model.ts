@@ -13,13 +13,12 @@ export interface IUser {
 
 export interface ITeam {
   id:	number;
-  name: 	string;
-  users:
-users*	[...]
-createdAt*	string($date-time)
-updatedAt*	string($date-time)
+  name: string;
+  users: IUser[];
+  createdAt: Date;
+  updatedAt: Date;
 }
-}
+
 
 
 

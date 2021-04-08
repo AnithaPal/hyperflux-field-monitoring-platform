@@ -1,0 +1,58 @@
+$primary-color: #1f8fce;
+$secondary-color: #606060;
+$font-family: Roboto;
+$dark-background: #282829;
+$text-color: #cccccc;
+
+.alert-danger{
+  background-color: #f47e7e;
+  border: #f47e7e;
+}
+
+em {
+  color: #f47e7e; padding-left: 2px;
+}
+.error input, .error select, .error textarea {
+   background-color: #E3C3C5;
+  }
+.error ::-webkit-input-placeholder {
+  color: #999;
+}
+.error ::-moz-placeholder {
+  color: #999;
+}
+.error :-moz-placeholder {
+   color: #999;
+  }
+.error :ms-input-placeholder {
+  color: #999;
+}
+
+.login-form {
+  width: 399px;
+  height: 320px;
+  flex-grow: 0;
+  margin: 203.5px 351px 0 350px;
+  padding: 32px 35px 22px;
+  background-color: #1e1e20;
+  box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.margin-center{
+  margin: auto;
+}
+
+.http-response-message {
+  margin-top: 20px;
+  padding: 10px, 0, 10px, 0;
+}
+
+.registration {
+  text-decoration: underline;
+}
+
+.registration-link {
+  padding-left: 20px;
+  color: $text-color;
+  font-size: 14px;
+}

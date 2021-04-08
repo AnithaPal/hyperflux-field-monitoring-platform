@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { HyperfluxComponent } from './hyperflux-app.component';
 import { HeaderComponent } from './nav/header/header.component';
@@ -13,10 +13,12 @@ import {
   AuthenticationService
  } from './user/index';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './user/login/login.component';
 
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
@@ -25,7 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     HyperfluxComponent,
     RegistrationComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
   ],
   providers: [AuthenticationService],
   bootstrap: [HyperfluxComponent]

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
-import { HeaderComponent } from '../../nav/header/header.component';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'registration',
   templateUrl: './registration.component.html',
@@ -17,8 +16,7 @@ export class RegistrationComponent implements OnInit {
   password: FormControl;
   errorMessage: string;
 
-  constructor(private auth: AuthenticationService){
-
+  constructor(private auth: AuthenticationService, private router: Router){
   }
 
   ngOnInit(): void {
@@ -38,23 +36,21 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  registerUser(formValues) :void{
+  registerUser(formValues): void{
 
     console.log(formValues);
     this.auth.registerUser(formValues).subscribe(
       data => {
         console.log(data);
+        // this.router.navigate(['login'], { state: { message: 'Your Registration is successful. Login here...' } });
+        this.router.navigate(['login'], { state: { message: 'Your Registration is successful. Login here...' } });
       },
       error => {
         console.error(error);
         if(error.error.message) {
           this.errorMessage = error.error.message;
         }
-      },
-      () => {
-        // this.invalidRegister = false;
-        // this.router.navigate(['login']);
-      })
+      });
   }
 
 
