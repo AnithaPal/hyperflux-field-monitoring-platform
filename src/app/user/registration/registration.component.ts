@@ -42,14 +42,18 @@ export class RegistrationComponent implements OnInit {
     this.auth.registerUser(formValues).subscribe(
       data => {
         console.log(data);
-        // this.router.navigate(['login'], { state: { message: 'Your Registration is successful. Login here...' } });
         this.router.navigate(['login'], { state: { message: 'Your Registration is successful. Login here...' } });
       },
       error => {
-        console.error(error);
+        debugger
+        console.log("error:  *****" + error);
+        console.error("error:  *****" + error);
         if(error.error.message) {
           this.errorMessage = error.error.message;
         }
+      },
+      ()=> {
+        console.log("Anuthing");
       });
   }
 
