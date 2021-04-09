@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HyperfluxComponent } from './hyperflux-app.component';
 import { HeaderComponent } from './nav/header/header.component';
+import {  HasValidToken } from './hasValidToken.service';
 import { appRoutes } from './routes';
 
 import {
@@ -30,7 +31,7 @@ import { LoginComponent } from './user/login/login.component';
     HeaderComponent,
     LoginComponent
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, HasValidToken],
   bootstrap: [HyperfluxComponent]
 })
 export class AppModule { }
