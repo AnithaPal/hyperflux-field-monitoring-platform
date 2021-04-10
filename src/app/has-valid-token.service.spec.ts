@@ -1,4 +1,4 @@
-import { HasValidToken } from './hasValidToken.service';
+import { HasValidToken } from './has-valid-token.service';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';

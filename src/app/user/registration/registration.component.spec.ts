@@ -43,9 +43,11 @@ describe('RegistrationComponent', () => {
     fixture.detectChanges();
     spyOn(router, 'navigate').and.resolveTo();
   });
+
   it('should create component', () => {
     expect(component).toBeTruthy();
   });
+
   describe('registerUser', () => {
     it('should register user and redirect to login page', () => {
       spyOn(authService, 'registerUser').and.returnValue(of(user));

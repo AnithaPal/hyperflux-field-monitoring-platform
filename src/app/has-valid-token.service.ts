@@ -14,6 +14,7 @@ export class HasValidToken implements CanActivate{
       const expirationDate = new Date(user.securityTokenExpiration).getTime();
       const now = new Date().getTime();
 
+      console.log(' I am  checking the token');
       if (now > expirationDate){
         this.router.navigate(['login']);
         return false;
