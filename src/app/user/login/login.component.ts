@@ -39,12 +39,13 @@ export class LoginComponent implements OnInit {
     console.log(formValues);
     this.auth.loginUser(formValues).subscribe(
       data => {
-        console.log(data);
         this.currentUser =  data as IUser;
         localStorage.setItem('user', JSON.stringify(this.currentUser));
         this.securityToken = data.securityToken;
         this.securityExpiration = data.securityTokenExpiration;
         this.team = data.team as ITeam;
+        this.router.navigate(['fields']);
+
       },
       error => {
         console.error(error);

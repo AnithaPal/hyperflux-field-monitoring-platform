@@ -5,14 +5,26 @@ import { HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { HyperfluxComponent } from './hyperflux-app.component';
-import { HeaderComponent } from './nav/header/header.component';
-import {  HasValidToken } from './hasValidToken.service';
+
+import {  HasValidToken } from './has-valid-token.service';
 import { appRoutes } from './routes';
 
 import {
   RegistrationComponent,
   AuthenticationService
  } from './user/index';
+
+import {
+   HeaderComponent,
+   SidebarComponent
+  } from './nav/index';
+
+import {
+  FieldListComponent,
+  HyperFluxService,
+  FieldListResolver
+ } from '../app/hyperFluxResource/index';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './user/login/login.component';
 
@@ -29,9 +41,17 @@ import { LoginComponent } from './user/login/login.component';
     HyperfluxComponent,
     RegistrationComponent,
     HeaderComponent,
-    LoginComponent
+    SidebarComponent,
+    LoginComponent,
+    HyperfluxComponent,
+    FieldListComponent
   ],
-  providers: [AuthenticationService, HasValidToken],
+  providers: [
+    AuthenticationService,
+    HasValidToken,
+    HyperFluxService,
+    FieldListResolver
+   ],
   bootstrap: [HyperfluxComponent]
 })
 export class AppModule { }
