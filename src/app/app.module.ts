@@ -23,7 +23,13 @@ import {
 import {
   FieldListComponent,
   HyperFluxService,
-  FieldListResolver
+  FieldListResolver,
+  FieldStabilityStatusPipe,
+  EncabulationRatePipe,
+  GfaBandwidthUsagePipe,
+  GfaBandwidthLimitPipe,
+  VSpaceLimitPipe,
+  VSpaceUsagePipe
  } from '../app/hyperFluxResource/index';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -46,7 +52,13 @@ import { LoginComponent } from './user/login/login.component';
     SidebarComponent,
     LoginComponent,
     HyperfluxComponent,
-    FieldListComponent
+    FieldListComponent,
+    FieldStabilityStatusPipe,
+    EncabulationRatePipe,
+    GfaBandwidthUsagePipe,
+    GfaBandwidthLimitPipe,
+    VSpaceLimitPipe,
+    VSpaceUsagePipe
   ],
   providers: [
     AuthenticationService,

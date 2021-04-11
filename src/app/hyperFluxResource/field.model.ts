@@ -3,6 +3,8 @@ export interface IField {
   team: number;
   name: string;
   connections: number;
+  fluxStateWarning: boolean;
+  encRate: number;
   vSpaceUsage: number;
   vSpaceLimit: number;
   gfaBandwidthUsage: number;
@@ -21,3 +23,5 @@ export interface IRelay {
   createdAt: Date;
   updatedAt:	Date;
 }
+
+

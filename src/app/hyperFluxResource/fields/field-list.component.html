@@ -27,7 +27,7 @@
           <div class="card">
             <div class="card-body">
               Field Stability Status
-              <h2> Critical </h2>
+              <h2>  {{ field.fluxStateWarning  | fieldStatus }}</h2>
             </div>
           </div>
 
@@ -56,6 +56,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4> Encabulation Rate </h4>
+                  <p> {{field.encRate | encabulationRate}}</p>
                 </div>
               </div>
 
@@ -75,11 +76,14 @@
               <div class="card">
                 <div class="card-body">
                   <h4> Gravetic Field Aperture Bandwidth </h4>
-                   <span> {{field.gfaBandwidthUsage}} Hf Used  / {{field.gfaBandwidthLimit}} Hf Total </span>
-
-                  <div class="progress progress-bar-height">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" ></div>
+                   <span> {{field.gfaBandwidthUsage | gfaBandwidthUage }}   / {{field.gfaBandwidthLimit | gfaBandwidthLimit}} </span>
+                  <div>
+                    <div class="progress progress-bar-height">
+                      <div class="progress-bar" role="progressbar" style="width: 25%" ></div>
+                    </div>
+                    <span> {{this.aperturePercentage}}%</span>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -89,9 +93,12 @@
               <div class="card">
                 <div class="card-body">
                   <h4> Vorscht Space Limit </h4>
-                  <span> {{field.vSpaceUsage}} Kt Used  / {{field.vSpaceLimit}} Jt Total </span>
-                  <div class="progress progress-bar-height">
-                    <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  <span> {{field.vSpaceUsage| vSpaceUsage  }}  / {{field.vSpaceLimit | vSpaceLimit }} Jt Total </span>
+                  <div>
+                    <div class="progress progress-bar-height">
+                      <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="25"></div>
+                    </div>
+                    <span> {{this.vsPercentage}}%</span>
                   </div>
                 </div>
               </div>
