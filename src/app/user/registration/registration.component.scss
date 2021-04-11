@@ -1,9 +1,4 @@
-
-$primary-color: #1f8fce;
-$secondary-color: #606060;
-$font-family: Roboto;
-$dark-background: #282829;
-$text-color: #cccccc;
+@import '../../../assets/variables.scss';
 
 a {
   color: $text-color;
@@ -34,6 +29,8 @@ em {
 .error :ms-input-placeholder {
   color: #999;
 }
+
+.gi-3x{font-size: 10em;}
 
 .http-response-message {
   margin-top: 20px;
@@ -100,10 +97,9 @@ label {
 .registration-form {
   width: 399px;
   height: 484px;
-  flex-grow: 0;
-  margin: 203.5px 351px 0 350px;
+  margin: 203.5px 251px 0 200px;
   padding: 32px 35px 22px;
-  background-color: #1e1e20;
+  background-color: $darker-background;
   box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.5);
 }
 

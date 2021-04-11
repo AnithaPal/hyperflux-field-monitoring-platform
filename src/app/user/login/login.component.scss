@@ -1,16 +1,12 @@
-$primary-color: #1f8fce;
-$secondary-color: #606060;
-$font-family: Roboto;
-$dark-background: #282829;
-$text-color: #cccccc;
-
+@import '../../../assets/variables.scss';
 .alert-danger{
-  background-color: #f47e7e;
-  border: #f47e7e;
+  background-color: $alert-danger-color;
+  border: $alert-danger-color;
 }
 
 em {
-  color: #f47e7e; padding-left: 2px;
+  color: $alert-danger-color;
+  padding-left: 2px;
 }
 .error input, .error select, .error textarea {
    background-color: #E3C3C5;
@@ -29,14 +25,14 @@ em {
 }
 
 .login-form {
+  background-color: $darker-background;
+  box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.5);
   width: 399px;
   height: 320px;
-  flex-grow: 0;
-  margin: 203.5px 351px 0 350px;
+  margin: 203.5px 251px 0 200px;
   padding: 32px 35px 22px;
-  background-color: #1e1e20;
-  box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.5);
 }
+
 
 .margin-center{
   margin: auto;

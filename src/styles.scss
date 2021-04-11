@@ -1,22 +1,18 @@
 @import './assets/customize-bootstrap.scss';
- @import '../node_modules/bootstrap/scss/bootstrap';
+@import './assets/variables.scss';
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import '../node_modules/bootstrap/scss/bootstrap';
 /* You can add global styles to this file, and also import other style files */
-$font-family: Roboto;
-$dark-background: #282829;
-$text-color: #cccccc;
+
 body {
   background-color: $dark-background;
   color: $text-color;
   font-family: $font-family;
 }
 
-.container {
-  width: 1100px;
-  height: 768px;
-  flex-grow: 0;
-  padding: 0 0 194px;
-  background-color: #282829;
+.fluid-container{
+  width: 100%;
+  padding: 10px;
 }
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
