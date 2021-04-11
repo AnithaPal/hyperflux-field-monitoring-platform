@@ -1,0 +1,76 @@
+@import '../../../assets/variables.scss';
+
+body{
+  background-color: $dark-background;
+  color: $text-color
+}
+.card {
+  background-color: #282829;
+  margin: 0px 0px 10px 0px;
+}
+.container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.container-fluid{
+  padding: auto;
+  width: 100%;
+}
+h1{
+  color: $text-color
+}
+
+.field-status {
+  padding-left: 16px;
+}
+
+.float-left {
+  float: left;
+}
+
+.header{
+  height: 70px;
+  background-color: #1e1e20;
+  border-bottom: 5px solid white;
+  width: 100%;
+}
+
+.gi-3x{font-size: 3em;}
+
+.padding-bottom {
+  padding-bottom: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.sticky {
+  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.content-section {
+  background: #1e1e20;
+  height: 1000px;
+  min-height: 100vh;
+  padding: 1em;
+}
+
+.sidebar-content {
+  background: #1e1e20;
+  padding: 1em;
+}
+
+
+.utilization-status {
+  padding-left: 16px;
+  position: relative;
+}
+
+
+
