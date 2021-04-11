@@ -1,10 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <nav class="navbar navbar-default navbar-fixed-top header">
-      <div class="container">
-        <fa-icon [icon]="faCircle" class="gi-3x float-left"></fa-icon>
-        <fa-icon [icon]="faCircle" class="gi-3x  float-right"></fa-icon>
-      </div>
+        <fa-icon [icon]="faCircle" class="gi-3x float-left faCircle icon" ></fa-icon>
+        <fa-icon [icon]="faCircle" class="gi-3x float-right faCircle icon"></fa-icon>
   </nav>
   </div>
 </div>
@@ -19,7 +17,7 @@
   <div class="col-10">
     <div class="content-section">
       <div class="row">
-        <h1> Field Name </h1>
+        <h1>  {{field.name }} </h1>
       </div>
       <div class="row">
         <div class="col-6" >
@@ -57,7 +55,7 @@
             <div class="col-6">
               <div class="card">
                 <div class="card-body">
-                  Encabulation Rate
+                  <h4> Encabulation Rate </h4>
                 </div>
               </div>
 
@@ -65,7 +63,8 @@
             <div class="col-6">
               <div class="card">
                 <div class="card-body">
-                  Superliminal Connections
+                  <h4> Superliminal Conns.</h4>
+                  {{field.connections}}
                 </div>
               </div>
 
@@ -75,7 +74,12 @@
             <div class="col">
               <div class="card">
                 <div class="card-body">
-                  Gravetic Field Aperture Bandwidth
+                  <h4> Gravetic Field Aperture Bandwidth </h4>
+                   <span> {{field.gfaBandwidthUsage}} Hf Used  / {{field.gfaBandwidthLimit}} Hf Total </span>
+
+                  <div class="progress progress-bar-height">
+                    <div class="progress-bar" role="progressbar" style="width: 25%" ></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -84,7 +88,11 @@
             <div class="col">
               <div class="card">
                 <div class="card-body">
-                  Vorscht Space Limit
+                  <h4> Vorscht Space Limit </h4>
+                  <span> {{field.vSpaceUsage}} Kt Used  / {{field.vSpaceLimit}} Jt Total </span>
+                  <div class="progress progress-bar-height">
+                    <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
                 </div>
               </div>
             </div>

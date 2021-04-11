@@ -5,21 +5,32 @@ body{
   color: $text-color
 }
 .card {
-  background-color: #282829;
+  background-color: $dark-background;
   margin: 0px 0px 10px 0px;
-}
-.container {
-  display: flex;
-  align-items: center;
-  text-align: center;
 }
 
 .container-fluid{
   padding: auto;
   width: 100%;
 }
+
+.content-section {
+  background: $darker-background;
+  height: 1000px;
+  min-height: 100vh;
+  padding: 1em;
+}
+
 h1{
   color: $text-color
+}
+
+h4{
+  font-size: 19px;
+}
+
+.icon {
+  color: #ffffff;
 }
 
 .field-status {
@@ -31,9 +42,9 @@ h1{
 }
 
 .header{
-  height: 70px;
+  height: 80px;
   background-color: #1e1e20;
-  border-bottom: 5px solid white;
+  border-bottom: 1px solid white;
   width: 100%;
 }
 
@@ -41,6 +52,12 @@ h1{
 
 .padding-bottom {
   padding-bottom: 10px;
+}
+
+.progress-bar-height{
+  height: 10px;
+  border: 2px solid $primary-color;
+  background-color: $dark-background;
 }
 
 * {
@@ -54,18 +71,10 @@ h1{
   top: 0;
 }
 
-.content-section {
-  background: #1e1e20;
-  height: 1000px;
-  min-height: 100vh;
-  padding: 1em;
-}
-
 .sidebar-content {
-  background: #1e1e20;
+  background: $darker-background;
   padding: 1em;
 }
-
 
 .utilization-status {
   padding-left: 16px;
