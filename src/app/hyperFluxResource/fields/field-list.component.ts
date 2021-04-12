@@ -1,17 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HyperFluxService } from '../shared/hyper-flux-service';
 import { ActivatedRoute } from '@angular/router';
+import { interval, Subscription } from 'rxjs';
 import { IField, IRelay } from '../shared/field.model';
-import { faCircle, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-filed-list',
   templateUrl: './field-list.component.html',
   styleUrls: ['./field-list.component.scss']
-
 })
-
-export class FieldListComponent implements OnInit  {
+export class FieldListComponent implements OnInit, OnDestroy  {
   field: IField;
   faCircle = faCircle;
   aperturePercentage: number;
@@ -20,7 +18,7 @@ export class FieldListComponent implements OnInit  {
   relays: IRelay[];
   realyCount: number;
   teamId: number;
-
+  subscriptions: Subscription[] = [];
 
   constructor(private hyperFluxService: HyperFluxService, private route: ActivatedRoute){}
 
@@ -29,6 +27,11 @@ export class FieldListComponent implements OnInit  {
     this.teamId = this.field.id;
     this.aperturePercentage = this.calculatePercentage(this.field.gfaBandwidthUsage, this.field.gfaBandwidthLimit);
     this.vsPercentage = this.calculatePercentage(this.field.vSpaceUsage, this.field.vSpaceLimit);
+    this.subscriptions.push(interval(3000).subscribe(() => this.getFields()));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.map((subscription) => subscription.unsubscribe());
   }
 
   private calculatePercentage(usage: number, limit: number): number {
@@ -36,10 +39,8 @@ export class FieldListComponent implements OnInit  {
   }
 
   private getFields(): void{
-    this.hyperFluxService.getFields().subscribe(
-      data => {
-        this.field =  data[0];
-      }
-    )
-  }
+    this.subscriptions.push(this.hyperFluxService.getFields().subscribe(data =>  {
+      this.field = data[0] as IField;
+    }));
+ }
 }
