@@ -29,7 +29,8 @@ import {
   GfaBandwidthUsagePipe,
   GfaBandwidthLimitPipe,
   VSpaceLimitPipe,
-  VSpaceUsagePipe
+  VSpaceUsagePipe,
+  RelayComponent
  } from '../app/hyperFluxResource/index';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -58,7 +59,8 @@ import { LoginComponent } from './user/login/login.component';
     GfaBandwidthUsagePipe,
     GfaBandwidthLimitPipe,
     VSpaceLimitPipe,
-    VSpaceUsagePipe
+    VSpaceUsagePipe,
+    RelayComponent
   ],
   providers: [
     AuthenticationService,

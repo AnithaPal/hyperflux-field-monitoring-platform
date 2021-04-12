@@ -19,7 +19,6 @@ export interface IRelay {
   id:	number;
   state:	string;
   strength:	number;
-  field: IField;
   createdAt: Date;
   updatedAt:	Date;
 }

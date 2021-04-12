@@ -1,6 +1,6 @@
 import {  Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { HyperFluxService } from './hyper-flux-service';
+import { HyperFluxService } from './shared/hyper-flux-service';
 
 @Injectable()
 export class FieldListResolver implements Resolve <any> {

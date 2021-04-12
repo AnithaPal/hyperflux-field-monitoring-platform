@@ -27,21 +27,11 @@
           <div class="card">
             <div class="card-body">
               Field Stability Status
-              <h2>  {{ field.fluxStateWarning  | fieldStatus }}</h2>
+              <h2 [ngClass]="{'critical': field.fluxStateWarning === true, 'normal': field.fluxStateWarning === false}" >  {{ field.fluxStateWarning  | fieldStatus }}</h2>
             </div>
           </div>
 
-            <div class="row utilization-status">
-              <div class="col">
-                <h3 class="float-left"> Vx Control Relays </h3>
-              <button type="button" class="btn btn-dark btn-outline-info float-right vertical-center">View</button>
-              </div>
-            </div>
-          <div class="card">
-            <div class="card-body">
-              14 Relays
-            </div>
-          </div>
+            <app-relay [teamId] =""></app-relay>
         </div>
         <div class="col-6">
           <div class="row utilization-status">
@@ -79,7 +69,7 @@
                    <span> {{field.gfaBandwidthUsage | gfaBandwidthUage }}   / {{field.gfaBandwidthLimit | gfaBandwidthLimit}} </span>
                   <div>
                     <div class="progress progress-bar-height">
-                      <div class="progress-bar" role="progressbar" style="width: 25%" ></div>
+                      <div class="progress-bar" role="progressbar"  [style.width]="aperturePercentage + '%'" ></div>
                     </div>
                     <span> {{this.aperturePercentage}}%</span>
                   </div>
@@ -96,7 +86,7 @@
                   <span> {{field.vSpaceUsage| vSpaceUsage  }}  / {{field.vSpaceLimit | vSpaceLimit }} Jt Total </span>
                   <div>
                     <div class="progress progress-bar-height">
-                      <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="25"></div>
+                      <div class="progress-bar" role="progressbar" [style.width]="vsPercentage + '%'"></div>
                     </div>
                     <span> {{this.vsPercentage}}%</span>
                   </div>

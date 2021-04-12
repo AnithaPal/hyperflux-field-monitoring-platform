@@ -21,6 +21,12 @@ body{
   padding: 1em;
 }
 
+.critical {
+  color: $alert-danger-color;
+  font-size: 30px;
+  font-weight: bold;
+}
+
 h1{
   color: $text-color
 }
@@ -74,11 +80,6 @@ h4{
 .sidebar-content {
   background: $darker-background;
   padding: 1em;
-}
-
-.utilization-status {
-  padding-left: 16px;
-  position: relative;
 }
 
 

@@ -1,4 +1,4 @@
-export * from './hyper-flux-service';
+export * from './shared/hyper-flux-service';
 export * from './fields/field-list.component';
 export * from './field-list-resolver.service';
 export * from './shared/field-stability-status.pipe';
@@ -7,3 +7,4 @@ export * from './shared/gfa-bandwidth-usage.pipe';
 export * from './shared/gfa-bandwidth-limit.pipe';
 export * from './shared/v-space-limit.pipe';
 export * from './shared/v-space-usage.pipe';
+export * from './relays/relay.component';
