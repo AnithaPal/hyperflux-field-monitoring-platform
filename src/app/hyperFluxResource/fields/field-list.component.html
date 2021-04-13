@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" >
   <div class="row">
     <nav class="navbar navbar-default navbar-fixed-top header">
         <fa-icon [icon]="faCircle" class="gi-3x float-left faCircle icon" ></fa-icon>
@@ -6,7 +6,7 @@
   </nav>
   </div>
 </div>
-<div class="row">
+<div class="row" >
   <div class="col-2">
     <div class="sidebar-section">
       <div class="sidebar-item sticky-top">
@@ -14,13 +14,13 @@
       </div>
     </div>
   </div>
-  <div class="col-10">
-    <div class="content-section">
+  <div class="col-10" >
+    <div class="content-section" >
       <div class="row">
         <h1>  {{field.name }} </h1>
       </div>
       <div class="row">
-        <div class="col-6" >
+        <div class="col-6"  >
           <div class="row field-status">
             <h3 class="float-left"> Field Status</h3>
           </div>
@@ -34,65 +34,105 @@
             <app-relay [teamId] ="teamId"></app-relay>
         </div>
         <div class="col-6">
-          <div class="row utilization-status">
-            <div class="col">
-              <h3 class="float-left"> Utlization </h3>
-            <button type="button" class="btn btn-dark btn-outline-info float-right vertical-center">Edit</button>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <div class="card">
-                <div class="card-body">
-                  <h4> Encabulation Rate </h4>
-                  <p> {{field.encRate | encabulationRate}}</p>
-                </div>
+          <div class="field-status" *ngIf="showStatus">
+            <div class="row utilization-status">
+              <div class="col">
+                <h3 class="float-left"> Utlization </h3>
+              <button type="button" class="btn btn-dark btn-outline-info float-right vertical-center" (click)="showForm()">Edit</button>
               </div>
-
             </div>
-            <div class="col-6">
-              <div class="card">
-                <div class="card-body">
-                  <h4> Superliminal Conns.</h4>
-                  {{field.connections}}
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="card">
-                <div class="card-body">
-                  <h4> Gravetic Field Aperture Bandwidth </h4>
-                   <span> {{field.gfaBandwidthUsage | gfaBandwidthUage }}   / {{field.gfaBandwidthLimit | gfaBandwidthLimit}} </span>
-                  <div>
-                    <div class="progress progress-bar-height">
-                      <div class="progress-bar" role="progressbar"  [style.width]="aperturePercentage + '%'" ></div>
-                    </div>
-                    <span> {{this.aperturePercentage}}%</span>
+            <div class="row">
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h4> Encabulation Rate </h4>
+                    <p> {{field.encRate | encabulationRate}}</p>
                   </div>
-
                 </div>
+
+              </div>
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h4> Superliminal Conns.</h4>
+                    {{field.connections}}
+                  </div>
+                </div>
+
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="card">
-                <div class="card-body">
-                  <h4> Vorscht Space Limit </h4>
-                  <span> {{field.vSpaceUsage| vSpaceUsage  }}  / {{field.vSpaceLimit | vSpaceLimit }} Jt Total </span>
-                  <div>
-                    <div class="progress progress-bar-height">
-                      <div class="progress-bar" role="progressbar" [style.width]="vsPercentage + '%'"></div>
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h4> Gravetic Field Aperture Bandwidth </h4>
+                     <span> {{field.gfaBandwidthUsage | gfaBandwidthUage }}   / {{field.gfaBandwidthLimit | gfaBandwidthLimit}} </span>
+                    <div>
+                      <div class="progress progress-bar-height">
+                        <div class="progress-bar" role="progressbar"  [style.width]="aperturePercentage + '%'" ></div>
+                      </div>
+                      <span> {{this.aperturePercentage}}%</span>
                     </div>
-                    <span> {{this.vsPercentage}}%</span>
+
                   </div>
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h4> Vorscht Space Limit </h4>
+                    <span> {{field.vSpaceUsage| vSpaceUsage  }}  / {{field.vSpaceLimit | vSpaceLimit }} Jt Total </span>
+                    <div>
+                      <div class="progress progress-bar-height">
+                        <div class="progress-bar" role="progressbar" [style.width]="vsPercentage + '%'"></div>
+                      </div>
+                      <span> {{this.vsPercentage}}%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field-form" *ngIf="showFieldForm">
+            <div class="row">
+              <div class="col">  <h1> Editing {{field.name}} </h1> </div>
+            </div>
+            <div class="row" class="vh-100">
+              <div class="col">
+                <form [formGroup]="fieldForm" (ngSubmit)=saveField(fieldForm.value)>
+                  <div class="form-group">
+                    <label for="connections">Superliminal Connections:</label>
+                    <input formControlName="connections" id="connections" type="number" class="form-control" placeholder="connections...">
+                    <em *ngIf="connections.invalid && connections.dirty && connections?.errors.required"> Required </em>
+                    <em *ngIf="connections.invalid && connections.dirty && (connections?.errors.max || connections?.errors.min) "> Connections should be from 0 to 10</em>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="gfaBandwidthLimit"> Gravetic Field Aperture Bandwidth Limit(Hf) </label>
+                    <input formControlName="gfaBandwidthLimit" id="gfaBandwidthLimit" type="number" class="form-control" >
+                    <em *ngIf="gfaBandwidthLimit.invalid && gfaBandwidthLimit.dirty && gfaBandwidthLimit?.errors.required"> Required </em>
+                    <em *ngIf="gfaBandwidthLimit.invalid && gfaBandwidthLimit.dirty && (gfaBandwidthLimit?.errors.max || gfaBandwidthLimit?.errors.min) "> Gravetic Field Aperture Bandwidth Limit should be from 0 to 5000 </em>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="vSpaceLimit">Vorscht Space Limit (Jt) </label>
+                    <input formControlName="vSpaceLimit" id="vSpaceLimit" type="number" class="form-control" >
+                    <em *ngIf="vSpaceLimit.invalid && vSpaceLimit.dirty && vSpaceLimit?.errors.required"> Required </em>
+                    <em *ngIf="vSpaceLimit.invalid && vSpaceLimit.dirty && (vSpaceLimit?.errors.max || vSpaceLimit?.errors.min) "> Vorscht Space Limit should be from 0 to 5000 </em>
+                  </div>
+                  <div class="row sticky-bottom  action-div">
+                    <div class="col-12 d-flex justify-content-end">
+                      <button class="btn btn-md btn-default  mr-1" (click)="cancel()"> Cancel</button>
+                      <button class="btn btn-md btn-primary  mr-1" [disabled]="fieldForm.invalid"  > Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </div>

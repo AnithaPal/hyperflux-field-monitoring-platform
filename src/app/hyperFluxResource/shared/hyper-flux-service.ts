@@ -30,11 +30,24 @@ export class HyperFluxService {
   getRealys(id: number): Observable<IRelay[]> {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + btoa(this.token)
+      Authorization: 'Bearer ' + btoa(this.token)
    });
 
     return this.http.get<any[]>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/fields/${id}/relays`, { headers: reqHeader })
     .pipe(catchError(this.handleError <IRelay[]>('getRelays')));
+
+  }
+
+  saveField(id: number, fieldData: IField) {
+
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + btoa(this.token)
+   });
+
+    return this.http.put<IField>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/fields/${id}`,
+    fieldData, { headers: reqHeader })
+      .pipe(catchError(this.handleError<IField>('saveField')));
 
   }
 
