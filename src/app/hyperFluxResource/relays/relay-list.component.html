@@ -1,0 +1,65 @@
+<div class="container-fluid" >
+  <div class="row">
+    <nav class="navbar navbar-default navbar-fixed-top header">
+        <fa-icon [icon]="faCircle" class="gi-3x float-left faCircle icon" ></fa-icon>
+        <fa-icon [icon]="faCircle" class="gi-3x float-right faCircle icon"></fa-icon>
+  </nav>
+  </div>
+</div>
+<div class="row">
+  <div class="col-2">
+    <div class="sidebar-section">
+      <div class="sidebar-item sticky-top">
+        <div class="row">
+          <div class="px-1 position-fixed" id="sticky-sidebar">
+            <div class="nav flex-column flex-nowrap vh-100 overflow-auto text-white p-2">
+                <a  routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link">Hyperflux Field</a>
+                <a  routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ fieldId, 'relays']"  class="nav-link sidebar-link">VX Control Relays</a>
+                <a href="./" class="nav-link sidebar-link">User Management</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-10">
+    <div class="content-section" >
+      <div class="row">
+        <h1>  VX Control Realys </h1>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">FIELD</th>
+                <th scope="col">BUGHORKIN STATE</th>
+                <th scope="col">STRENGTH(VUPS)</th>
+                <th scope="col"> </th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let relay of field.relays">
+              <tr>
+                <th scope="row">{{relay.id}} </th>
+                <td> {{field.name}}</td>
+                <td>{{relay.state}}</td>
+                <td>{{relay.strength}}</td>
+                <td>
+                  <fa-icon [icon]="faPencil" class="float-left faCircle " ></fa-icon>
+                  <fa-icon [icon]="faTrash" class="float-right faCircle "></fa-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

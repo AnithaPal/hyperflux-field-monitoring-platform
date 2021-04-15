@@ -8,3 +8,4 @@ export * from './shared/gfa-bandwidth-limit.pipe';
 export * from './shared/v-space-limit.pipe';
 export * from './shared/v-space-usage.pipe';
 export * from './relays/relay.component';
+export * from './relays/relay-list.component';

@@ -16,6 +16,17 @@ export class HyperFluxService {
   constructor(private http: HttpClient){
   }
 
+  getField(id: number): Observable<IField> {
+
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + btoa(this.token)
+   });
+
+    return this.http.get<IField>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/fields/${id}`, { headers: reqHeader })
+    .pipe(catchError(this.handleError <IField>('getField')));
+  }
+
   getFields(): Observable<IField[]> {
 
     const reqHeader = new HttpHeaders({

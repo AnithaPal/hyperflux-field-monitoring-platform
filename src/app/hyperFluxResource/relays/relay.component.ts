@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HyperFluxService } from '../shared/hyper-flux-service';
 import { IRelay } from '../shared/field.model';
 
@@ -20,21 +21,24 @@ import { IRelay } from '../shared/field.model';
 })
 
 export class RelayComponent implements OnInit{
-  @Input() teamId: number;
+  @Input() fieldId: number;
   relays: IRelay[];
   relayCount: number;
 
-  constructor(private hyperFluxService: HyperFluxService){
+  constructor(private hyperFluxService: HyperFluxService, private router: Router){
   }
 
   ngOnInit(): void{
-    this.getRealys(this.teamId);
+    this.getRealys(this.fieldId);
   }
 
-  getRealys(teamId: number): void {
-    this.hyperFluxService.getRealys(teamId).subscribe(
+  navigateToRelayList(): void{
+    this.router.navigate([`fields/${this.fieldId}/relays`], { state: this.relays });
+  }
+
+  getRealys(fieldId: number): void {
+    this.hyperFluxService.getRealys(fieldId).subscribe(
       data => {
-        console.log(data);
         this.relays = data;
         this.relayCount = this.relays.length;
       },

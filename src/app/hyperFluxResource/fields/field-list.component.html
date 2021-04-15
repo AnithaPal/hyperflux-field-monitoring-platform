@@ -10,7 +10,17 @@
   <div class="col-2">
     <div class="sidebar-section">
       <div class="sidebar-item sticky-top">
-        <app-sidebar> </app-sidebar>
+        <div class="row">
+          <div class="px-1 position-fixed" id="sticky-sidebar">
+            <div class="nav flex-column flex-nowrap vh-100 overflow-auto text-white p-2">
+                <a  routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link" *ngIf="isOwner()">Hyperflux Field</a>
+                <a  routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ fieldId, 'relays']"  class="nav-link" *ngIf="isOwner()" >VX Control Relays</a>
+                <a href="./" class="nav-link" *ngIf="isOwner()">User Management</a>
+              </div>
+            </div>
+        </div>
       </div>
     </div>
   </div>
@@ -31,7 +41,7 @@
             </div>
           </div>
 
-            <app-relay [teamId] ="teamId"></app-relay>
+            <app-relay [fieldId] ="fieldId"></app-relay>
         </div>
         <div class="col-6">
           <div class="field-status" *ngIf="showStatus">
@@ -101,27 +111,30 @@
             </div>
             <div class="row" class="vh-100">
               <div class="col">
-                <form [formGroup]="fieldForm" (ngSubmit)=saveField(fieldForm.value)>
-                  <div class="form-group">
-                    <label for="connections">Superliminal Connections:</label>
-                    <input formControlName="connections" id="connections" type="number" class="form-control" placeholder="connections...">
-                    <em *ngIf="connections.invalid && connections.dirty && connections?.errors.required"> Required </em>
-                    <em *ngIf="connections.invalid && connections.dirty && (connections?.errors.max || connections?.errors.min) "> Connections should be from 0 to 10</em>
+                <form [formGroup]="fieldForm" (ngSubmit)=saveField(fieldForm.value) >
+                  <div class="mh-100">
+                    <div class="form-group">
+                      <label for="connections">Superliminal Connections:</label>
+                      <input formControlName="connections" id="connections" type="number" class="form-control" placeholder="connections...">
+                      <em *ngIf="connections.invalid && connections.dirty && connections?.errors.required"> Required </em>
+                      <em *ngIf="connections.invalid && connections.dirty && (connections?.errors.max || connections?.errors.min) "> Connections should be from 0 to 10</em>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="gfaBandwidthLimit"> Gravetic Field Aperture Bandwidth Limit(Hf) </label>
+                      <input formControlName="gfaBandwidthLimit" id="gfaBandwidthLimit" type="number" class="form-control" >
+                      <em *ngIf="gfaBandwidthLimit.invalid && gfaBandwidthLimit.dirty && gfaBandwidthLimit?.errors.required"> Required </em>
+                      <em *ngIf="gfaBandwidthLimit.invalid && gfaBandwidthLimit.dirty && (gfaBandwidthLimit?.errors.max || gfaBandwidthLimit?.errors.min) "> Gravetic Field Aperture Bandwidth Limit should be from 0 to 5000 </em>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="vSpaceLimit">Vorscht Space Limit (Jt) </label>
+                      <input formControlName="vSpaceLimit" id="vSpaceLimit" type="number" class="form-control" >
+                      <em *ngIf="vSpaceLimit.invalid && vSpaceLimit.dirty && vSpaceLimit?.errors.required"> Required </em>
+                      <em *ngIf="vSpaceLimit.invalid && vSpaceLimit.dirty && (vSpaceLimit?.errors.max || vSpaceLimit?.errors.min) "> Vorscht Space Limit should be from 0 to 5000 </em>
+                    </div>
                   </div>
 
-                  <div class="form-group">
-                    <label for="gfaBandwidthLimit"> Gravetic Field Aperture Bandwidth Limit(Hf) </label>
-                    <input formControlName="gfaBandwidthLimit" id="gfaBandwidthLimit" type="number" class="form-control" >
-                    <em *ngIf="gfaBandwidthLimit.invalid && gfaBandwidthLimit.dirty && gfaBandwidthLimit?.errors.required"> Required </em>
-                    <em *ngIf="gfaBandwidthLimit.invalid && gfaBandwidthLimit.dirty && (gfaBandwidthLimit?.errors.max || gfaBandwidthLimit?.errors.min) "> Gravetic Field Aperture Bandwidth Limit should be from 0 to 5000 </em>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="vSpaceLimit">Vorscht Space Limit (Jt) </label>
-                    <input formControlName="vSpaceLimit" id="vSpaceLimit" type="number" class="form-control" >
-                    <em *ngIf="vSpaceLimit.invalid && vSpaceLimit.dirty && vSpaceLimit?.errors.required"> Required </em>
-                    <em *ngIf="vSpaceLimit.invalid && vSpaceLimit.dirty && (vSpaceLimit?.errors.max || vSpaceLimit?.errors.min) "> Vorscht Space Limit should be from 0 to 5000 </em>
-                  </div>
                   <div class="row sticky-bottom  action-div">
                     <div class="col-12 d-flex justify-content-end">
                       <button class="btn btn-md btn-default  mr-1" (click)="cancel()"> Cancel</button>

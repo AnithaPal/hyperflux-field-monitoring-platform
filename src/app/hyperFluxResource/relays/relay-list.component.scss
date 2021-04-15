@@ -1,21 +1,6 @@
 @import '../../../assets/variables.scss';
 @import '../../../assets/customize-bootstrap.scss';
 
-.action-div{
-  background-color: #333333;
-  padding: 20px 0 20px 0;
-  width: 100%;
-}
-
-body{
-  background-color: $dark-background;
-  color: $text-color
-}
-.card {
-  background-color: $dark-background;
-  margin: 0px 0px 10px 0px;
-}
-
 .container-fluid{
   padding: auto;
   width: 100%;
@@ -28,11 +13,6 @@ body{
   padding: 1em;
 }
 
-.critical {
-  color: $alert-danger-color;
-  font-size: 30px;
-  font-weight: bold;
-}
 em {
   color: #f47e7e; padding-left: 2px;
 }
@@ -51,26 +31,11 @@ em {
 .error :ms-input-placeholder {
   color: #999;
 }
-.field-form {
-  background-color: #222222;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-}
-.field-status {
-  padding-left: 16px;
-}
-
-.float-left {
-  float: left;
-}
 
 .gi-3x{font-size: 3em;}
 
 h1{
   color: $text-color
-}
-
-h4{
-  font-size: 19px;
 }
 
 .header{
@@ -79,7 +44,6 @@ h4{
   border-bottom: 1px solid white;
   width: 100%;
 }
-
 
 .icon {
   color: #ffffff;
@@ -120,20 +84,6 @@ input:hover {
   border: 1px solid gray;
 }
 
-.padding-bottom {
-  padding-bottom: 10px;
-}
-
-.progress-bar-height{
-  height: 10px;
-  border: 2px solid $primary-color;
-  background-color: $dark-background;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 .sticky {
   position: relative;
   position: -webkit-sticky;
@@ -144,6 +94,11 @@ input:hover {
 .sidebar-content {
   background: $darker-background;
   padding: 1em;
+}
+
+.sidebar-link {
+  font-size: 16px;
+  font-weight: bolder;
 }
 
 

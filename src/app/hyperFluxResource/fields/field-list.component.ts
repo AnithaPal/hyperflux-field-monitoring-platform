@@ -18,10 +18,11 @@ export class FieldListComponent implements OnInit, OnDestroy  {
   relayCoont: number;
   relays: IRelay[];
   realyCount: number;
-  teamId: number;
+  fieldId: number;
   subscriptions: Subscription[] = [];
   showFieldForm = false;
   showStatus = true;
+  currentUser;
 
   fieldForm: FormGroup;
   connections: FormControl;
@@ -32,10 +33,9 @@ export class FieldListComponent implements OnInit, OnDestroy  {
 
   ngOnInit(): void{
     this.field = this.route.snapshot.data.fields[0];
-    this.teamId = this.field.id;
+    this.fieldId = this.field.id;
     this.aperturePercentage = this.calculatePercentage(this.field.gfaBandwidthUsage, this.field.gfaBandwidthLimit);
     this.vsPercentage = this.calculatePercentage(this.field.vSpaceUsage, this.field.vSpaceLimit);
-
     this.connections = new FormControl(this.field.connections, [Validators.required, Validators.max(10), Validators.min(0)]);
     this.gfaBandwidthLimit = new FormControl(this.field.gfaBandwidthLimit, [Validators.required, Validators.max(5000), Validators.min(0)]);
     this.vSpaceLimit = new FormControl(this.field.vSpaceLimit, [Validators.required, Validators.max(5000), Validators.min(0)]);
@@ -46,6 +46,7 @@ export class FieldListComponent implements OnInit, OnDestroy  {
     vSpaceLimit: this.vSpaceLimit
     });
     this.subscriptions.push(interval(3000).subscribe(() => this.getFields()));
+    this.setCurrentUser();
 
   }
 
@@ -59,7 +60,6 @@ export class FieldListComponent implements OnInit, OnDestroy  {
   }
 
   saveField(formValues): void {
-    console.log("field form values " + formValues);
     this.hyperFluxService.saveField(this.field.id, formValues).subscribe((data) => {
       this.showStatus = true;
       this.showFieldForm = false;
@@ -70,6 +70,15 @@ export class FieldListComponent implements OnInit, OnDestroy  {
   showForm(): void{
     this.showFieldForm = true;
     this.showStatus = false;
+  }
+
+  setCurrentUser(): void{
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
+  }
+
+  isOwner(): boolean{
+    return this.currentUser.role === 'OWNER';
+
   }
 
 
