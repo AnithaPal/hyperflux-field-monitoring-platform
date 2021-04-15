@@ -62,6 +62,19 @@ export class HyperFluxService {
 
   }
 
+  saveRelay(id: number, relayData: IRelay) {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + btoa(this.token)
+   });
+
+    return this.http.put<IRelay>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/relays/${id}`,
+    relayData, { headers: reqHeader })
+      .pipe(catchError(this.handleError<IRelay>('saveRelay')));
+
+
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

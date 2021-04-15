@@ -30,7 +30,7 @@
       <div class="row">
         <h1>  VX Control Realys </h1>
       </div>
-      <div class="row">
+      <div class="row only-table">
         <div class="col-12">
           <table class="table table-dark">
             <thead>
@@ -57,9 +57,38 @@
           </table>
         </div>
       </div>
+      <div class="row table-form">
+        <div class="col-6">
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">FIELD</th>
+                <th scope="col">BUGHORKIN STATE</th>
+                <th scope="col">STRENGTH(VUPS)</th>
+                <th scope="col"> </th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let relay of field.relays">
+              <tr>
+                <th scope="row">{{relay.id}} </th>
+                <td>{{field.name}}</td>
+                <td>{{relay.state}}</td>
+                <td>{{relay.strength}}</td>
+                <td>
+                  <fa-icon [icon]="faPencil" class="float-left faCircle " (click)="editRelay()" ></fa-icon>
+                  <fa-icon [icon]="faTrash" class="float-right faCircle "></fa-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-6">
+          <h1> Editing Realy</h1>
+        </div>
+
+
+      </div>
     </div>
-
-
-
   </div>
 </div>

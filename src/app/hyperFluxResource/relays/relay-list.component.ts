@@ -20,22 +20,36 @@ export class RelayListComponent implements  OnInit{
   faTrash = faTrash;
   faPencil = faPen;
   field;
+  showRelayForm = false;
+  showOnlyTable = true;
 
   constructor(private hyperFluxService: HyperFluxService, private router: Router, private route: ActivatedRoute){
     // this.relays = this.router.getCurrentNavigation().extras.state;
   }
 
   ngOnInit(): void{
-
      this.route.params.subscribe(params => {
-
-      this.fieldId  = params['id'];
-      console.log(this.fieldId);
+      this.fieldId  = params.id;
     });
+
      if (this.fieldId ) {
-      this.getField(this.fieldId);
-      this.getRealys(this.fieldId);
+      // this.getField(this.fieldId);
+      // this.getRealys(this.fieldId);
+      const joinedWithObject = forkJoin({
+        field:   this.hyperFluxService.getField(this.fieldId),
+        relays: this.hyperFluxService.getRealys(this.fieldId)
+      });
+
+      joinedWithObject.subscribe(data => {
+          console.log(data);
+          this.field = data.field;
+          this.field.relays = data.relays;
+      });
     }
+  }
+
+  editRelay() {
+
   }
 
   getRealys(fieldId: number): void {
