@@ -77,13 +77,15 @@
                   <div class="card-body">
                     <h4> Gravetic Field Aperture Bandwidth </h4>
                      <span> {{field.gfaBandwidthUsage | gfaBandwidthUage }}   / {{field.gfaBandwidthLimit | gfaBandwidthLimit}} </span>
-                    <div>
-                      <div class="progress progress-bar-height">
-                        <div class="progress-bar" role="progressbar"  [style.width]="aperturePercentage + '%'" ></div>
-                      </div>
-                      <span> {{this.aperturePercentage}}%</span>
-                    </div>
 
+                     <div class="p-container">
+                      <div class="p-bar">
+                        <div class="progress progress-bar-height">
+                          <div class="progress-bar" role="progressbar" [style.width]="vsPercentage + '%'"></div>
+                        </div>
+                      </div>
+                      <div class="p-label"> {{this.aperturePercentage}}% </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -94,11 +96,13 @@
                   <div class="card-body">
                     <h4> Vorscht Space Limit </h4>
                     <span> {{field.vSpaceUsage| vSpaceUsage  }}  / {{field.vSpaceLimit | vSpaceLimit }} Jt Total </span>
-                    <div>
-                      <div class="progress progress-bar-height">
-                        <div class="progress-bar" role="progressbar" [style.width]="vsPercentage + '%'"></div>
+                    <div class="p-container">
+                      <div class="p-bar">
+                        <div class="progress progress-bar-height">
+                          <div class="progress-bar" role="progressbar" [style.width]="vsPercentage + '%'"></div>
+                        </div>
                       </div>
-                      <span> {{this.vsPercentage}}%</span>
+                      <div class="p-label"> {{this.vsPercentage}}% </div>
                     </div>
                   </div>
                 </div>
