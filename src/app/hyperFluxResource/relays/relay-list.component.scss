@@ -1,41 +1,6 @@
 @import '../../../assets/variables.scss';
 @import '../../../assets/customize-bootstrap.scss';
 
-input {
-  margin: auto;
-  font-size: 16px;
-  padding: 10px 8px 9px;
-  border-radius: 5px;
-  border: solid 1px #606060;
-  background-color: rgba(196, 196, 196, 0);
-  color: $text-color;
-}
-
-input:disabled input {
-  border: solid 1px rgba(96, 96, 96, 0.5);
-}
-
-input:focus {
-  border: solid 1px #59b8ed;
-}
-
-input:focus .Inner-Text {
-  color: #ffffff;
-}
-
-input:focus label {
-  color: #59b8ed;
-}
-
-input:hover {
-  background: -webkit-linear-gradient(#eee, #333);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-    opacity:1.0;
-  border: 1px solid gray;
-}
-
 .sticky {
   position: relative;
   position: -webkit-sticky;
@@ -43,5 +8,9 @@ input:hover {
   top: 0;
 }
 
+option:not(:checked) {
+  background-color: #222222;
+  color: $text-color;
+}
 
 

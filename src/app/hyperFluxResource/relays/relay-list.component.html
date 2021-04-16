@@ -17,7 +17,7 @@
                 [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link">Hyperflux Field</a>
                 <a  routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ fieldId, 'relays']"  class="nav-link sidebar-link">VX Control Relays</a>
-                <a href="./" class="nav-link sidebar-link">User Management</a>
+                <a href="./" class="nav-link sidebar-link" *ngIf="isOwner()">User Management</a>
               </div>
             </div>
         </div>
@@ -26,11 +26,11 @@
   </div>
 
   <div class="col-10">
-    <div class="content-section" >
+    <div class="content-section" *ngIf="field">
       <div class="row">
         <h1>  VX Control Realys </h1>
       </div>
-      <div class="row only-table">
+      <div class="row" *ngIf="showOnlyTable">
         <div class="col-12">
           <table class="table table-dark">
             <thead>
@@ -39,25 +39,25 @@
                 <th scope="col">FIELD</th>
                 <th scope="col">BUGHORKIN STATE</th>
                 <th scope="col">STRENGTH(VUPS)</th>
-                <th scope="col"> </th>
+                <th *ngIf="isOwner()" scope="col"> </th>
               </tr>
             </thead>
             <tbody *ngFor="let relay of field.relays">
               <tr>
                 <th scope="row">{{relay.id}} </th>
                 <td> {{field.name}}</td>
-                <td>{{relay.state}}</td>
-                <td>{{relay.strength}}</td>
-                <td>
-                  <fa-icon [icon]="faPencil" class="float-left faCircle " ></fa-icon>
-                  <fa-icon [icon]="faTrash" class="float-right faCircle "></fa-icon>
+                <td> {{relay.state | titlecase }}</td>
+                <td> {{relay.strength}}</td>
+                <td *ngIf="isOwner()">
+                  <fa-icon [icon]="faPencil" class="float-left faCircle" (click)="editRelay(relay)" ></fa-icon>
+                  <fa-icon [icon]="faTrash" class="float-right faCircle" (click)="deleteRelay(relay)"></fa-icon>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="row table-form">
+      <div class="row" *ngIf="showRelayForm">
         <div class="col-6">
           <table class="table table-dark">
             <thead>
@@ -66,25 +66,52 @@
                 <th scope="col">FIELD</th>
                 <th scope="col">BUGHORKIN STATE</th>
                 <th scope="col">STRENGTH(VUPS)</th>
-                <th scope="col"> </th>
+                <th scope="col" *ngIf="isOwner()"> </th>
               </tr>
             </thead>
             <tbody *ngFor="let relay of field.relays">
               <tr>
                 <th scope="row">{{relay.id}} </th>
                 <td>{{field.name}}</td>
-                <td>{{relay.state}}</td>
+                <td>{{relay.state | titlecase }}</td>
                 <td>{{relay.strength}}</td>
-                <td>
-                  <fa-icon [icon]="faPencil" class="float-left faCircle " (click)="editRelay()" ></fa-icon>
-                  <fa-icon [icon]="faTrash" class="float-right faCircle "></fa-icon>
+                <td *ngIf="isOwner()">
+                  <fa-icon [icon]="faPencil" class="float-left faCircle " (click)="editRelay(relay)" ></fa-icon>
+                  <fa-icon [icon]="faTrash" class="float-right faCircle" (click)="deleteRelay(relay)"></fa-icon>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="col-6">
-          <h1> Editing Realy</h1>
+          <div class="row" *ngIf="currentRelay">  <h1> Editing Control Relay {{currentRelay.id}} </h1> </div>
+          <div clas="row">
+            <form [formGroup]="relayForm" (ngSubmit)=saveRelay(relayForm.value) >
+              <div class="mh-100">
+                <div class="form-group">
+                  <label for="state">State</label>
+                  <select formControlName="state" id="state"  class="form-control selectpicker" data-style="btn-primary">
+                    <option class="state-option" *ngFor="let state of relayState | keyvalue" [ngValue]="state.value" >{{state.value}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="strength"> Strength (Vups) </label>
+                  <input formControlName="strength" id="strength" type="number" class="form-control" [ngClass]="{'is-invalid': strength.invalid && strength.dirty && (strength?.errors.required || strength?.errors.max || strength?.errors.min)}">
+                  <em *ngIf="strength.invalid && strength.dirty && strength?.errors.required"> Required </em>
+                  <em *ngIf="strength.invalid && strength.dirty && (strength?.errors.max || strength?.errors.min) "> Strength should be from 0 to 10 </em>
+                </div>
+              </div>
+
+              <div class="row sticky-bottom  action-div">
+                <div class="col-12 d-flex justify-content-end">
+                  <button class="btn btn-md btn-default  mr-1" (click)="cancel()"> Cancel</button>
+                  <button class="btn btn-md btn-primary  mr-1" [disabled]="relayForm.invalid"> Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
         </div>
 
 
