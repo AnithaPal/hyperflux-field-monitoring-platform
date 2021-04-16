@@ -55,8 +55,8 @@
               <div class="col-6">
                 <div class="card">
                   <div class="card-body">
-                    <h4> Encabulation Rate </h4>
-                    <p> {{field.encRate | encabulationRate}}</p>
+                    <h3> Encabulation Rate </h3>
+                    <p class="highlight-text">  {{field.encRate | encabulationRate}}</p>
                   </div>
                 </div>
 
@@ -64,8 +64,8 @@
               <div class="col-6">
                 <div class="card">
                   <div class="card-body">
-                    <h4> Superliminal Conns.</h4>
-                    {{field.connections}}
+                    <h3> Superliminal Conns.</h3>
+                    <p class="highlight-text"> {{field.connections}} </p>
                   </div>
                 </div>
 
@@ -75,7 +75,7 @@
               <div class="col">
                 <div class="card">
                   <div class="card-body">
-                    <h4> Gravetic Field Aperture Bandwidth </h4>
+                    <h3> Gravetic Field Aperture Bandwidth </h3>
                      <span> {{field.gfaBandwidthUsage | gfaBandwidthUage }}   / {{field.gfaBandwidthLimit | gfaBandwidthLimit}} </span>
 
                      <div class="p-container">
@@ -94,7 +94,7 @@
               <div class="col">
                 <div class="card">
                   <div class="card-body">
-                    <h4> Vorscht Space Limit </h4>
+                    <h3> Vorscht Space Limit </h3>
                     <span> {{field.vSpaceUsage| vSpaceUsage  }}  / {{field.vSpaceLimit | vSpaceLimit }} Jt Total </span>
                     <div class="p-container">
                       <div class="p-bar">

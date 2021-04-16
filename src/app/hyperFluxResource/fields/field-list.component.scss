@@ -2,101 +2,39 @@
 @import '../../../assets/customize-bootstrap.scss';
 
 
-// a:focus {
-//   border-radius: 5px;
-//   border: solid 2px $primary-color;
-//   background-color: rgba(31, 143, 206, 0);
-//   color: $primary-color;
-// }
-
-a:active, a.hover {
-  background-color: rgba(31, 143, 206, 0.3);
-  color: $primary-color;
-  font-weight: bolder;
-}
-
-.action-div{
+.action-div {
   background-color: #333333;
   padding: 20px 0 20px 0;
   width: 100%;
 }
 
-body{
+body {
   background-color: $dark-background;
   color: $text-color
 }
+
 .card {
   background-color: $dark-background;
   margin: 0px 0px 10px 0px;
 }
 
-.container-fluid{
-  padding: auto;
-  width: 100%;
-}
-
-.content-section {
-  background: $darker-background;
-  height: 1000px;
-  min-height: 100vh;
-  padding: 1em;
-}
-
 .critical {
   color: $alert-danger-color;
   font-size: 30px;
-  font-weight: bold;
+  font-weight: bolder;
 }
-em {
-  color: #f47e7e; padding-left: 2px;
-}
-.error input, .error select, .error textarea {
-   background-color: #E3C3C5;
-  }
-.error ::-webkit-input-placeholder {
-  color: #999;
-}
-.error ::-moz-placeholder {
-  color: #999;
-}
-.error :-moz-placeholder {
-   color: #999;
-  }
-.error :ms-input-placeholder {
-  color: #999;
-}
+
 .field-form {
-  background-color: #222222;
+  background-color: $darker-background;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
+
 .field-status {
   padding-left: 16px;
 }
 
 .float-left {
   float: left;
-}
-
-.gi-3x{font-size: 3em;}
-
-h1{
-  color: $text-color
-}
-
-h4{
-  font-size: 19px;
-}
-
-.header{
-  height: 80px;
-  background-color: #1e1e20;
-  border-bottom: 1px solid white;
-  width: 100%;
-}
-
-
-.icon {
-  color: #ffffff;
 }
 
 input {
@@ -107,7 +45,6 @@ input {
   border: solid 1px #606060;
   background-color: rgba(196, 196, 196, 0);
   color: $text-color;
-
 }
 
 input:disabled input {
@@ -129,16 +66,33 @@ input:focus label {
 input:hover {
   background: -webkit-linear-gradient(#eee, #333);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
     opacity:1.0;
   border: 1px solid gray;
 }
 
+.normal {
+  font-size: 30px;
+  font-weight: bolder;
+}
+
 .padding-bottom {
   padding-bottom: 10px;
 }
+.p-bar{
+  width: 90%;
+  float: left;
+  padding-top:5px;
+}
 
-.progress-bar-height{
+.p-label{
+width: 10%;
+float: left;
+padding-left: 5px;
+}
+
+.progress-bar-height {
   height: 10px;
   border: 2px solid $primary-color;
   background-color: $dark-background;
@@ -153,22 +107,4 @@ input:hover {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-}
-
-.sidebar-content {
-  background: $darker-background;
-  padding: 1em;
-}
-
-
-.p-bar{
-    width: 90%;
-    float: left;
-    padding-top:5px;
-}
-
-.p-label{
-  width: 10%;
-  float: left;
-  padding-left: 5px;
 }

@@ -5,14 +5,108 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
 /* You can add global styles to this file, and also import other style files */
 
+a:focus {
+  border-radius: 5px;
+  border: solid 2px $primary-color;
+  background-color: rgba(31, 143, 206, 0);
+  color: $primary-color;
+}
+
+a:active, a.hover {
+  background-color: rgba(31, 143, 206, 0.3);
+  color: $primary-color;
+  font-weight: bolder;
+}
+
+.alert-danger{
+  background-color: $alert-danger-color;
+  border: $alert-danger-color;
+}
+
 body {
   background-color: $dark-background;
   color: $text-color;
   font-family: $font-family;
 }
+.container-fluid {
+  padding: auto;
+  width: 100%;
+}
 
-.fluid-container{
+.content-section {
+  background: $darker-background;
+  height: 1000px;
+  min-height: 100vh;
+  padding: 1em;
+}
+
+em {
+  color: #f47e7e; padding-left: 2px;
+}
+
+.error input, .error select, .error textarea {
+   background-color: #E3C3C5;
+}
+
+.error ::-webkit-input-placeholder {
+  color: #999;
+}
+
+.error ::-moz-placeholder {
+  color: #999;
+}
+
+.error :-moz-placeholder {
+   color: #999;
+}
+
+.error :ms-input-placeholder {
+  color: #999;
+}
+
+.fluid-container {
   width: 100%;
   padding: 10px;
+}
+
+.gi-3x {
+  font-size: 2em;
+}
+.gi-2x { font-size: 2em;
+}
+
+h1 {
+  color: $text-color;
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+.header{
+  height: 80px;
+  background-color: #1e1e20;
+  border-bottom: 1px solid white;
+  width: 100%;
+}
+
+.highlight-text {
+  font-size: 24px;
+  font-weight:bold;
+}
+
+.icon {
+  color: #ffffff;
+}
+
+.sidebar-content {
+  background: $darker-background;
+  padding: 1em;
+}
+
+.sidebar-link {
+  font-size: 16px;
+  font-weight: bolder;
 }
 

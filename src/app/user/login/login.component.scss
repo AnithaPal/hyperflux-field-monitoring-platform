@@ -1,28 +1,4 @@
 @import '../../../assets/variables.scss';
-.alert-danger{
-  background-color: $alert-danger-color;
-  border: $alert-danger-color;
-}
-
-em {
-  color: $alert-danger-color;
-  padding-left: 2px;
-}
-.error input, .error select, .error textarea {
-   background-color: #E3C3C5;
-  }
-.error ::-webkit-input-placeholder {
-  color: #999;
-}
-.error ::-moz-placeholder {
-  color: #999;
-}
-.error :-moz-placeholder {
-   color: #999;
-  }
-.error :ms-input-placeholder {
-  color: #999;
-}
 
 .login-form {
   background-color: $darker-background;
