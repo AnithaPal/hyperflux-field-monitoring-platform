@@ -72,6 +72,7 @@ em {
 .gi-3x {
   font-size: 2em;
 }
+
 .gi-2x { font-size: 2em;
 }
 
@@ -98,6 +99,27 @@ h3 {
 
 .icon {
   color: #ffffff;
+}
+
+.form-control {
+  background-color: rgba(196, 196, 196, 0);
+  margin: auto;
+  font-size: 16px;
+  padding: 10px 8px 9px;
+  border-radius: 5px;
+  border: solid 1px #606060;
+}
+
+.form-control:focus {
+  border-color: solid 1px #59b8ed;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 1px #59b8ed, 0 0 4px #59b8ed;
+}
+
+.form-control:hover {
+  border-color: solid 1px #cccc;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 1px #cccc, 0 0 4px #cccc;
 }
 
 .sidebar-content {

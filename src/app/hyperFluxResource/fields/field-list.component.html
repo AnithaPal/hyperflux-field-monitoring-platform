@@ -119,21 +119,21 @@
                   <div class="mh-100">
                     <div class="form-group">
                       <label for="connections">Superliminal Connections:</label>
-                      <input formControlName="connections" id="connections" type="number" class="form-control" placeholder="connections...">
+                      <input formControlName="connections" id="connections" type="number" class="form-control" [ngClass]="{'is-invalid': connections.invalid && connections.dirty  && (connections?.errors.required || connections?.errors.max || connections?.errors.min) }" placeholder="connections...">
                       <em *ngIf="connections.invalid && connections.dirty && connections?.errors.required"> Required </em>
                       <em *ngIf="connections.invalid && connections.dirty && (connections?.errors.max || connections?.errors.min) "> Connections should be from 0 to 10</em>
                     </div>
 
                     <div class="form-group">
                       <label for="gfaBandwidthLimit"> Gravetic Field Aperture Bandwidth Limit(Hf) </label>
-                      <input formControlName="gfaBandwidthLimit" id="gfaBandwidthLimit" type="number" class="form-control" >
+                      <input formControlName="gfaBandwidthLimit" id="gfaBandwidthLimit" type="number" class="form-control" [ngClass]="{'is-invalid': gfaBandwidthLimit.invalid && gfaBandwidthLimit.dirty && (gfaBandwidthLimit?.errors.required || gfaBandwidthLimit?.errors.max || gfaBandwidthLimit?.errors.min)}">
                       <em *ngIf="gfaBandwidthLimit.invalid && gfaBandwidthLimit.dirty && gfaBandwidthLimit?.errors.required"> Required </em>
                       <em *ngIf="gfaBandwidthLimit.invalid && gfaBandwidthLimit.dirty && (gfaBandwidthLimit?.errors.max || gfaBandwidthLimit?.errors.min) "> Gravetic Field Aperture Bandwidth Limit should be from 0 to 5000 </em>
                     </div>
 
                     <div class="form-group">
                       <label for="vSpaceLimit">Vorscht Space Limit (Jt) </label>
-                      <input formControlName="vSpaceLimit" id="vSpaceLimit" type="number" class="form-control" >
+                      <input formControlName="vSpaceLimit" id="vSpaceLimit" type="number" class="form-control" [ngClass]="{'is-invalid': vSpaceLimit.invalid && vSpaceLimit.dirty && (vSpaceLimit?.errors.required || vSpaceLimit?.errors.max || vSpaceLimit?.errors.min) }">
                       <em *ngIf="vSpaceLimit.invalid && vSpaceLimit.dirty && vSpaceLimit?.errors.required"> Required </em>
                       <em *ngIf="vSpaceLimit.invalid && vSpaceLimit.dirty && (vSpaceLimit?.errors.max || vSpaceLimit?.errors.min) "> Vorscht Space Limit should be from 0 to 5000 </em>
                     </div>
