@@ -16,7 +16,7 @@
                 <a  routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link">Hyperflux Field</a>
                 <a  routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ fieldId, 'relays']"  class="nav-link sidebar-link">VX Control Relays</a>
+                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ '/fields', fieldId, 'relays']"  class="nav-link sidebar-link">VX Control Relays</a>
                 <a href="./" class="nav-link sidebar-link" *ngIf="isOwner()">User Management</a>
               </div>
             </div>
@@ -30,8 +30,9 @@
       <div class="row">
         <h1>  VX Control Realys </h1>
       </div>
-      <div class="row" *ngIf="showOnlyTable">
-        <div class="col-12">
+      <div class="row" >
+        <div  [ngClass]="{'col-12': showOnlyTable === true, 'col-6': showRelayForm === true}">
+          <!-- <div class="col-6" *ngIf="showRelayForm"> -->
           <table class="table table-dark">
             <thead>
               <tr>
@@ -50,72 +51,63 @@
                 <td> {{relay.strength}}</td>
                 <td *ngIf="isOwner()">
                   <fa-icon [icon]="faPencil" class="float-left faCircle" (click)="editRelay(relay)" ></fa-icon>
-                  <fa-icon [icon]="faTrash" class="float-right faCircle" (click)="deleteRelay(relay)"></fa-icon>
+                  <fa-icon [icon]="faTrash" class="float-right faCircle" (click)="open(content, relay)"></fa-icon>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
-      <div class="row" *ngIf="showRelayForm">
-        <div class="col-6">
-          <table class="table table-dark">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">FIELD</th>
-                <th scope="col">BUGHORKIN STATE</th>
-                <th scope="col">STRENGTH(VUPS)</th>
-                <th scope="col" *ngIf="isOwner()"> </th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let relay of field.relays">
-              <tr>
-                <th scope="row">{{relay.id}} </th>
-                <td>{{field.name}}</td>
-                <td>{{relay.state | titlecase }}</td>
-                <td>{{relay.strength}}</td>
-                <td *ngIf="isOwner()">
-                  <fa-icon [icon]="faPencil" class="float-left faCircle " (click)="editRelay(relay)" ></fa-icon>
-                  <fa-icon [icon]="faTrash" class="float-right faCircle" (click)="deleteRelay(relay)"></fa-icon>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-6">
-          <div class="row" *ngIf="currentRelay">  <h1> Editing Control Relay {{currentRelay.id}} </h1> </div>
-          <div clas="row">
-            <form [formGroup]="relayForm" (ngSubmit)=saveRelay(relayForm.value) >
-              <div class="mh-100">
-                <div class="form-group">
-                  <label for="state">State</label>
-                  <select formControlName="state" id="state"  class="form-control selectpicker" data-style="btn-primary">
-                    <option class="state-option" *ngFor="let state of relayState | keyvalue" [ngValue]="state.value" >{{state.value}}</option>
-                  </select>
+          <div *ngIf="showRelayForm" [ngClass]="{'col-6': showOnlyTable === false && showRelayForm === true }">
+            <div class="row" *ngIf="currentRelay">  <h1> Editing Control Relay {{currentRelay.id}} </h1> </div>
+            <div clas="row">
+              <form [formGroup]="relayForm" (ngSubmit)=saveRelay(relayForm.value)>
+                <div class="mh-100">
+                  <div class="form-group">
+                    <label for="state">State</label>
+                    <select formControlName="state" id="state"  class="form-control selectpicker" data-style="btn-primary">
+                      <option class="state-option" *ngFor="let state of relayState | keyvalue" [ngValue]="state.value" >{{state.value}}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="strength"> Strength (Vups) </label>
+                    <input formControlName="strength" id="strength" type="number" class="form-control" [ngClass]="{'is-invalid': strength.invalid && strength.dirty && (strength?.errors.required || strength?.errors.max || strength?.errors.min)}">
+                    <em *ngIf="strength.invalid && strength.dirty && strength?.errors.required"> Required </em>
+                    <em *ngIf="strength.invalid && strength.dirty && (strength?.errors.max || strength?.errors.min) "> Strength should be from 0 to 10 </em>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="strength"> Strength (Vups) </label>
-                  <input formControlName="strength" id="strength" type="number" class="form-control" [ngClass]="{'is-invalid': strength.invalid && strength.dirty && (strength?.errors.required || strength?.errors.max || strength?.errors.min)}">
-                  <em *ngIf="strength.invalid && strength.dirty && strength?.errors.required"> Required </em>
-                  <em *ngIf="strength.invalid && strength.dirty && (strength?.errors.max || strength?.errors.min) "> Strength should be from 0 to 10 </em>
+                <div class="row sticky-bottom  action-div">
+                  <div class="col-12 d-flex justify-content-end">
+                    <button class="btn btn-md btn-default  mr-1" (click)="cancel()"> Cancel</button>
+                    <button class="btn btn-md btn-primary  mr-1" [disabled]="relayForm.invalid"> Save</button>
+                  </div>
                 </div>
-              </div>
+              </form>
+            </div>
 
-              <div class="row sticky-bottom  action-div">
-                <div class="col-12 d-flex justify-content-end">
-                  <button class="btn btn-md btn-default  mr-1" (click)="cancel()"> Cancel</button>
-                  <button class="btn btn-md btn-primary  mr-1" [disabled]="relayForm.invalid"> Save</button>
-                </div>
-              </div>
-            </form>
           </div>
-
-        </div>
 
 
       </div>
     </div>
   </div>
 </div>
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header delete-modal" >
+      <h4 class="modal-title" id="modal-basic-title"> Delete Confirmation</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">×</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <p>Are you sure to delete this relay?</p>
+  </div>
+  <div class="modal-footer center">
+      <button type="button" class="btn btn-default" (click)="d('Cross click')">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="c('yes')">Delete</button>
+  </div>
+</ng-template>

@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HyperFluxService } from '../shared/hyper-flux-service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { IField, IRelay } from '../shared/field.model';
 import { faCircle,  faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
@@ -13,13 +15,10 @@ export enum RelayState {
   inverted = 'INVERTED',
 }
 
-
 @Component({
   templateUrl: './relay-list.component.html',
   styleUrls:  ['./relay-list.component.scss']
 })
-
-
 
 export class RelayListComponent implements  OnInit{
   relays ;
@@ -34,15 +33,16 @@ export class RelayListComponent implements  OnInit{
   relayId: number;
   relayState = RelayState;
   currentUser;
-
+  closeResult: string;
 
   relayForm: FormGroup;
   state: FormControl;
   strength: FormControl;
 
 
-  constructor(private hyperFluxService: HyperFluxService, private router: Router, private route: ActivatedRoute){
-    // this.relays = this.router.getCurrentNavigation().extras.state;
+  constructor(private hyperFluxService: HyperFluxService,
+              private route: ActivatedRoute,
+              private modalService: NgbModal){
   }
 
   ngOnInit(): void{
@@ -53,8 +53,6 @@ export class RelayListComponent implements  OnInit{
     this.setCurrentUser();
 
     if (this.fieldId ) {
-      // this.getField(this.fieldId);
-      // this.getRealys(this.fieldId);
       const joinedWithObject = forkJoin({
         field:   this.hyperFluxService.getField(this.fieldId),
         relays: this.hyperFluxService.getRealys(this.fieldId)
@@ -76,8 +74,10 @@ export class RelayListComponent implements  OnInit{
     this.currentUser = JSON.parse(localStorage.getItem('user'));
   }
 
-  deleteRelay():void{
-
+  deleteRelay(relayId): void{
+    this.hyperFluxService.deleteRelay(relayId).subscribe((response) => {
+      this.ngOnInit();
+    });
   }
 
   editRelay(relay): void {
@@ -122,10 +122,20 @@ export class RelayListComponent implements  OnInit{
     return this.currentUser.role === 'OWNER';
   }
 
+  open(content, relay): void {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      if (result === 'yes') {
+        this.deleteRelay(relay.id);
+      }
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 
   saveRelay(formValues): void{
     this.hyperFluxService.saveRelay(this.currentRelay.id, formValues).subscribe(data => {
-
+      this.ngOnInit();
       this.showOnlyTable = true;
       this.showRelayForm = false;
     },
@@ -133,6 +143,16 @@ export class RelayListComponent implements  OnInit{
       console.error(error);
     })
 
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }

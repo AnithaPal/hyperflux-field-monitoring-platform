@@ -16,6 +16,19 @@ export class HyperFluxService {
   constructor(private http: HttpClient){
   }
 
+
+  deleteRelay(relayId) {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + btoa(this.token)
+   });
+
+    return this.http.delete<IRelay>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/relays/${relayId}`,
+    { headers: reqHeader, observe: 'response' })
+    .pipe(catchError(this.handleError('deleteRelay')));
+  }
+
+
   getField(id: number): Observable<IField> {
 
     const reqHeader = new HttpHeaders({
@@ -71,8 +84,6 @@ export class HyperFluxService {
     return this.http.put<IRelay>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/relays/${id}`,
     relayData, { headers: reqHeader })
       .pipe(catchError(this.handleError<IRelay>('saveRelay')));
-
-
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -27,6 +27,8 @@ body {
   background-color: $dark-background;
   color: $text-color;
   font-family: $font-family;
+  height: 100%;
+  display: block;
 }
 .container-fluid {
   padding: auto;

@@ -63,8 +63,10 @@ export class FieldListComponent implements OnInit, OnDestroy  {
     this.hyperFluxService.saveField(this.field.id, formValues).subscribe((data) => {
       this.showStatus = true;
       this.showFieldForm = false;
+    },
+    error => {
+      console.error(error);
     });
-
   }
 
   showForm(): void{
@@ -83,7 +85,7 @@ export class FieldListComponent implements OnInit, OnDestroy  {
 
 
   private calculatePercentage(usage: number, limit: number): number {
-    return Math.round(usage / limit * 100);
+    return Math.round(usage * 100/ limit );
   }
 
   private getFields(): void{
