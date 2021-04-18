@@ -14,10 +14,10 @@
           <div class="px-1 position-fixed" id="sticky-sidebar">
             <div class="nav flex-column flex-nowrap vh-100 overflow-auto text-white p-2">
                 <a  routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link">Hyperflux Field</a>
+                [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link"  routerLinkActive="active-link">Hyperflux Field</a>
                 <a  routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ '/fields', fieldId, 'relays']"  class="nav-link sidebar-link">VX Control Relays</a>
-                <a href="./" class="nav-link sidebar-link" *ngIf="isOwner()">User Management</a>
+                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ '/fields', fieldId, 'relays']"  class="nav-link sidebar-link"  routerLinkActive="active-link">VX Control Relays</a>
+                <a href="./" class="nav-link sidebar-link" *ngIf="isOwner()"  routerLinkActive="active-link">User Management</a>
               </div>
             </div>
         </div>

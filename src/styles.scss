@@ -133,4 +133,8 @@ h3 {
   font-size: 16px;
   font-weight: bolder;
 }
-
+.active-link {
+  background-color: rgba(31, 143, 206, 0.3);
+  color: $primary-color;
+  font-weight: bolder;
+}
