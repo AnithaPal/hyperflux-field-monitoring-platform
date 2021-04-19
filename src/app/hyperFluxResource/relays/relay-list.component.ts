@@ -7,7 +7,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { IField, IRelay } from '../shared/field.model';
-import { faCircle,  faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faCircle,  faTrash, faPen, faAngleDoubleLeft, faAngleDoubleRight, faAngleRight, faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 
 
 export enum RelayState {
@@ -27,6 +27,10 @@ export class RelayListComponent implements  OnInit{
   faCircle = faCircle;
   faTrash = faTrash;
   faPencil = faPen;
+  faAngleDoubleLeft = faAngleDoubleLeft;
+  faAngleDoubleRight = faAngleDoubleRight;
+  faAngleRight = faAngleRight;
+  faAngleLeft = faAngleLeft;
   field;
   showRelayForm = false;
   showOnlyTable = true;
@@ -38,6 +42,10 @@ export class RelayListComponent implements  OnInit{
   relayForm: FormGroup;
   state: FormControl;
   strength: FormControl;
+
+  page = 1;
+  pageSize = 10;
+  collectionSize;
 
 
   constructor(private hyperFluxService: HyperFluxService,
@@ -61,6 +69,7 @@ export class RelayListComponent implements  OnInit{
       joinedWithObject.subscribe(data => {
           this.field = data.field;
           this.field.relays = data.relays;
+          this.collectionSize = data.relays.length;
       });
     }
   }
@@ -143,6 +152,12 @@ export class RelayListComponent implements  OnInit{
       console.error(error);
     })
 
+  }
+
+  refreshRelays(): void {
+    this.field.relays
+      .map((relay, i) => ({id: i + 1, ...relay}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
   private getDismissReason(reason: any): string {

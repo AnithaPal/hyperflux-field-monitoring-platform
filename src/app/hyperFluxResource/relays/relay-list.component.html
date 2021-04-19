@@ -32,30 +32,39 @@
       </div>
       <div class="row" >
         <div  [ngClass]="{'col-12': showOnlyTable === true, 'col-6': showRelayForm === true}">
-          <!-- <div class="col-6" *ngIf="showRelayForm"> -->
-          <table class="table table-dark">
-            <thead>
+          <table class="table table-dark  table-borderless  ">
+            <thead  class="table-header">
               <tr>
-                <th scope="col">ID</th>
-                <th scope="col">FIELD</th>
-                <th scope="col">BUGHORKIN STATE</th>
-                <th scope="col">STRENGTH(VUPS)</th>
-                <th *ngIf="isOwner()" scope="col"> </th>
+                <th scope="col" class="text-left" >ID</th>
+                <th scope="col" class="text-left" >FIELD</th>
+                <th scope="col" class="text-left">BUGHORKIN STATE</th>
+                <th scope="col" class="text-left">STRENGTH(VUPS)</th>
+                <th *ngIf="isOwner()" scope="col" class="text-center"> </th>
               </tr>
             </thead>
-            <tbody *ngFor="let relay of field.relays">
+            <tbody *ngFor="let relay of field.relays | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ">
               <tr>
-                <th scope="row">{{relay.id}} </th>
-                <td> {{field.name}}</td>
-                <td> {{relay.state | titlecase }}</td>
-                <td> {{relay.strength}}</td>
-                <td *ngIf="isOwner()">
+                <th class="text-left" scope="row">{{relay.id}} </th>
+                <td class="text-left"> {{field.name}}</td>
+                <td class="text-left"> {{relay.state | titlecase }}</td>
+                <td class="text-left"> {{relay.strength}}</td>
+                <td class="text-left" *ngIf="isOwner()">
                   <fa-icon [icon]="faPencil" class="float-left faCircle" (click)="editRelay(relay)" ></fa-icon>
                   <fa-icon [icon]="faTrash" class="float-right faCircle" (click)="open(content, relay)"></fa-icon>
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshRelays()" >
+                <ng-template ngbPaginationFirst>  <fa-icon [icon]="faAngleLeft" class=" faAngleLeft" ></fa-icon> </ng-template>
+                <ng-template ngbPaginationLast>   <fa-icon [icon]="faAngleRight" class=" faAngleRight" ></fa-icon></ng-template>
+                <ng-template ngbPaginationPrevious>    <fa-icon [icon]="faAngleDoubleLeft" class=" faAngleDoubleLeft" ></fa-icon> </ng-template>
+                <ng-template ngbPaginationNext>   <fa-icon [icon]="faAngleDoubleRight" class=" faAngleDoubleRight" ></fa-icon> </ng-template>
+              </ngb-pagination>
+            </tfoot>
           </table>
+
+
         </div>
           <div *ngIf="showRelayForm" [ngClass]="{'col-6': showOnlyTable === false && showRelayForm === true }">
             <div class="row" *ngIf="currentRelay">  <h1> Editing Control Relay {{currentRelay.id}} </h1> </div>

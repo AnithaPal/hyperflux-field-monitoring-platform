@@ -33,4 +33,6 @@ option:not(:checked) {
   background-color: #222222;
   color: $text-color;
 }
-
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+  background-color: #333333 !important;
+}
