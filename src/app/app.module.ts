@@ -12,7 +12,9 @@ import { appRoutes } from './routes';
 
 import {
   RegistrationComponent,
-  AuthenticationService
+  AuthenticationService,
+  LoginComponent,
+  UserManagementComponent
  } from './user/index';
 
 import {
@@ -35,7 +37,21 @@ import {
  } from '../app/hyperFluxResource/index';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './user/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import {  MatDividerModule } from '@angular/material/divider';
+import {  MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule} from '@angular/material/dialog';
+
+
+
+
 
 @NgModule({
   imports: [
@@ -45,7 +61,19 @@ import { LoginComponent } from './user/login/login.component';
     HttpClientModule,
     NgbModule,
     RouterModule.forRoot(appRoutes),
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatDividerModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatDialogModule
+
   ],
   declarations: [
     HyperfluxComponent,
@@ -62,7 +90,8 @@ import { LoginComponent } from './user/login/login.component';
     VSpaceLimitPipe,
     VSpaceUsagePipe,
     RelayComponent,
-    RelayListComponent
+    RelayListComponent,
+    UserManagementComponent
   ],
   providers: [
     AuthenticationService,

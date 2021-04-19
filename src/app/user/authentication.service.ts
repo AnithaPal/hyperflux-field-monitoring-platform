@@ -13,7 +13,6 @@ export class AuthenticationService {
 
   }
 
-
   calculateBearerToken(email: string, securityToken): string{
     const token = `${email}:${securityToken}`;
     return btoa(token);

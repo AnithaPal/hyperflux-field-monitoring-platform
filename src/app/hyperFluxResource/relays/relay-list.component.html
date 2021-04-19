@@ -17,7 +17,8 @@
                 [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link"  routerLinkActive="active-link">Hyperflux Field</a>
                 <a  routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ '/fields', fieldId, 'relays']"  class="nav-link sidebar-link"  routerLinkActive="active-link">VX Control Relays</a>
-                <a href="./" class="nav-link sidebar-link" *ngIf="isOwner()"  routerLinkActive="active-link">User Management</a>
+                <a outerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ '/users', 'management']"  class="nav-link sidebar-link" *ngIf="isOwner()"  routerLinkActive="active-link">User Management</a>
               </div>
             </div>
         </div>

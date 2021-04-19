@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IField, IRelay } from './field.model';
+import { IUser } from '../../user/user.model';
 
 
 @Injectable()
@@ -12,6 +13,7 @@ export class HyperFluxService {
   email =  this.user.email;
   securityToken = this.user.securityToken;
   token = `${this.email}:${this.securityToken}`;
+  bearerToken = btoa(this.token);
 
   constructor(private http: HttpClient){
   }
@@ -20,7 +22,7 @@ export class HyperFluxService {
   deleteRelay(relayId) {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + btoa(this.token)
+      Authorization: 'Bearer ' + this.bearerToken
    });
 
     return this.http.delete<IRelay>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/relays/${relayId}`,
@@ -33,7 +35,7 @@ export class HyperFluxService {
 
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + btoa(this.token)
+      Authorization: 'Bearer ' + this.bearerToken
    });
 
     return this.http.get<IField>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/fields/${id}`, { headers: reqHeader })
@@ -44,7 +46,7 @@ export class HyperFluxService {
 
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + btoa(this.token)
+      Authorization: 'Bearer ' + this.bearerToken
    });
 
     return this.http.get<any[]>('http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/fields', { headers: reqHeader })
@@ -54,7 +56,7 @@ export class HyperFluxService {
   getRealys(id: number): Observable<IRelay[]> {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + btoa(this.token)
+      Authorization: 'Bearer ' + this.bearerToken
    });
 
     return this.http.get<any[]>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/fields/${id}/relays`, { headers: reqHeader })
@@ -62,11 +64,22 @@ export class HyperFluxService {
 
   }
 
+  getUsers(): Observable<IUser[]>{
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.bearerToken
+   });
+
+    return this.http.get<IUser[]>('http://hyperflux.herokuapp.com/hyperflux/api/v1/iam/users', { headers: reqHeader })
+   .pipe(catchError(this.handleError <IUser[]>('getUsers')));
+
+  }
+
   saveField(id: number, fieldData: IField) {
 
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + btoa(this.token)
+      Authorization: 'Bearer ' + this.bearerToken
    });
 
     return this.http.put<IField>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/fields/${id}`,
@@ -78,7 +91,7 @@ export class HyperFluxService {
   saveRelay(id: number, relayData: IRelay) {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + btoa(this.token)
+      Authorization: 'Bearer ' + this.bearerToken
    });
 
     return this.http.put<IRelay>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/relays/${id}`,

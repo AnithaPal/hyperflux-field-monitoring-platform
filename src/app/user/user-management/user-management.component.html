@@ -1,0 +1,67 @@
+
+
+<mat-toolbar color="primary" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+  <mat-toolbar-row>
+    <button mat-icon-button layout="row" layout-align="start center" flex>
+        <fa-icon [icon]="faCircle" class="gi-3x float-right faCircle icon" (click)="sidenav.toggle()"></fa-icon>
+    </button>
+    <span class="menu-spacer"></span>
+    <div>
+      <fa-icon [icon]="faCircle" class="gi-3x  faCircle icon"></fa-icon>
+    </div>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+
+      <a  mat-list-item routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link"  routerLinkActive="active-link">Hyperflux Field</a>
+      <a mat-list-item routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link"  routerLinkActive="active-link"> Vx Control Relays </a>
+      <a outerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ '/users', 'management']"  class="nav-link sidebar-link"   routerLinkActive="active-link"> User Management </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+      <table mat-table [dataSource]="dataSource" matSort  class="mat-table mat-elevation-z0" >
+        <ng-container matColumnDef="displayName">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let user"> {{user.displayName}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="team">
+          <th mat-header-cell *matHeaderCellDef> Team </th>
+          <td mat-cell *matCellDef="let user"> {{user.team}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef> Role </th>
+          <td mat-cell *matCellDef="let user"> {{user.role}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let user">
+            <mat-icon   mat-raised-button (click)="openDialog()" >edit</mat-icon>
+            <mat-icon  >delete</mat-icon>  </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

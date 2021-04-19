@@ -6,11 +6,13 @@ import { FieldListComponent } from './hyperFluxResource/fields/field-list.compon
 import { HasValidToken } from '../app/has-valid-token.service';
 import { FieldListResolver } from '../app/hyperFluxResource/field-list-resolver.service';
 import { RelayListComponent } from '../app/hyperFluxResource/relays/relay-list.component';
+import { UserManagementComponent } from '../app/user/user-management/user-management.component';
 
 export const appRoutes: Routes = [
   { path: '', component: RegistrationComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
   { path: 'fields', component: FieldListComponent, canActivate: [HasValidToken], resolve: { fields: FieldListResolver }},
-  { path: 'fields/:id/relays', component: RelayListComponent, canActivate: [HasValidToken] }
+  { path: 'fields/:id/relays', component: RelayListComponent, canActivate: [HasValidToken] },
+  { path: 'users/management', component: UserManagementComponent, canActivate: [HasValidToken] }
 ];
