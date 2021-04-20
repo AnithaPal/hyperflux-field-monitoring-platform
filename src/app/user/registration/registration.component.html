@@ -1,89 +1,76 @@
+
 <div>
-  <div class="row">
-    <div class=col-md-12>
-      <header> </header>
-    </div>
-  </div>
-  <div class="row  text-center http-response-message">
-    <div class="col-sm-12 col-md-6 mx-auto">
-        <span class="col text-center alert alert-danger error-message" role="alert" *ngIf="errorMessage?.length > 0">{{ errorMessage }}</span>
-    </div>
-  </div>
-
-  <div class="row align-items-center h-100">
-    <div class="col-sm-12 col-md-6 mx-auto">
-      <div class="registration-form">
-        <form form [formGroup]="registrationForm" (ngSubmit)=registerUser(registrationForm.value)>
-          <div formGroupName="team">
-            <div class="form-group">
-              <label for="name">Company:</label>
-              <input formControlName="name"
-                id="name" type="text"
-                class="form-control"
-                placeholder="Company..."
-                [ngClass]="{'is-invalid': name.invalid && name.dirty && (name?.errors.required || name?.errors.maxlength || name?.errors.minlength) }" />
-              <em *ngIf="name.invalid && name.dirty && name?.errors.required">  Required </em>
-              <em *ngIf="name.invalid && name.dirty && name?.errors.maxlength"> Can't exceed 15 characters </em>
-              <em *ngIf="name.invalid && name.dirty && name?.errors.minlength"> Company should contain 4 characters </em>
-            </div>
-          </div>
-
-          <div formGroupName="user">
-            <div class="form-group">
-              <label for="displayName">Display Name:</label>
-              <input formControlName="displayName"
-                id="displayName"
-                type="text"
-                class="form-control"
-                placeholder="Display Name..."
-                [ngClass]="{'is-invalid': displayName.invalid && displayName.dirty && (displayName?.errors.required || displayName?.errors.maxlength || displayName?.errors.minlength) }"
-              />
-              <em *ngIf="displayName.invalid && displayName.dirty && displayName?.errors.required">  Required </em>
-              <em *ngIf="displayName.invalid && displayName.dirty && displayName?.errors.maxlength"> Can't exceed 15 characters </em>
-              <em *ngIf="displayName.invalid && displayName.dirty && displayName?.errors.minlength"> Display Name should contain 4 characters </em>
-            </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input formControlName="email"
-                id="email"
-                class="form-control"
-                placeholder="Email..."
-                [ngClass]="{'is-invalid': email.invalid && email.dirty && (email?.errors.required || email?.errors.pattern )}"
-                />
-              <em *ngIf="email.invalid && email.dirty && email?.errors.required"> Required </em>
-              <em *ngIf="email.invalid && email.dirty && email?.errors.pattern"> Email not valid </em>
-            </div>
-
-            <div class="form-group">
-              <label for="password">Password:</label>
-              <input formControlName="password"
-                id="password"
-                type="password"
-                class="form-control"
-                placeholder="Password..."
-                [ngClass]="{'is-invalid': password.invalid && password.dirty && (password?.errors.required || password?.errors.minlength)}"
-               />
-              <em *ngIf="password.invalid && password.dirty && password?.errors.required">  Required </em>
-              <em *ngIf="password.invalid && password.dirty && password?.errors.minlength">  Password should contain 8 characters </em>
-            </div>
-          </div>
-
-          <div class="text-center row">
-            <div class="col">
-              <button type="submit" [disabled]="registrationForm.invalid" class="btn btn-md btn-primary">Register</button>
-            </div>
-          </div>
-          <div class="col text-center login-link">
-            <p>Already have an account <span> <a class="login" routerLinkActive="active"
-              [routerLinkActiveOptions]="{exact: true}"   routerLink="/login"> Login Here </a> </span></p>
-          </div>
-        </form>
+  <app-header> </app-header>
+    <div class="row  text-center http-response-message">
+      <div class="col-sm-12 col-md-6 mx-auto">
+          <span class="col text-center alert alert-danger error-message" role="alert" *ngIf="errorMessage?.length > 0">{{ errorMessage }}</span>
       </div>
-
     </div>
-  </div>
+    <div class="registration-form">
+      <form form [formGroup]="registrationForm" (ngSubmit)=registerUser(registrationForm.value)>
+        <div formGroupName="team">
+          <div class="form-group">
+            <label for="name">Company:</label>
+            <input formControlName="name"
+              id="name" type="text"
+              class="form-control"
+              placeholder="Company..."
+              [ngClass]="{'is-invalid': name.invalid && name.dirty && (name?.errors.required || name?.errors.maxlength || name?.errors.minlength) }" />
+            <em *ngIf="name.invalid && name.dirty && name?.errors.required">  Required </em>
+            <em *ngIf="name.invalid && name.dirty && name?.errors.maxlength"> Can't exceed 15 characters </em>
+            <em *ngIf="name.invalid && name.dirty && name?.errors.minlength"> Company should contain 4 characters </em>
+          </div>
+        </div>
 
+        <div formGroupName="user">
+          <div class="form-group">
+            <label for="displayName">Display Name:</label>
+            <input formControlName="displayName"
+              id="displayName"
+              type="text"
+              class="form-control"
+              placeholder="Display Name..."
+              [ngClass]="{'is-invalid': displayName.invalid && displayName.dirty && (displayName?.errors.required || displayName?.errors.maxlength || displayName?.errors.minlength) }"
+            />
+            <em *ngIf="displayName.invalid && displayName.dirty && displayName?.errors.required">  Required </em>
+            <em *ngIf="displayName.invalid && displayName.dirty && displayName?.errors.maxlength"> Can't exceed 15 characters </em>
+            <em *ngIf="displayName.invalid && displayName.dirty && displayName?.errors.minlength"> Display Name should contain 4 characters </em>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input formControlName="email"
+              id="email"
+              class="form-control"
+              placeholder="Email..."
+              [ngClass]="{'is-invalid': email.invalid && email.dirty && (email?.errors.required || email?.errors.pattern )}"
+              />
+            <em *ngIf="email.invalid && email.dirty && email?.errors.required"> Required </em>
+            <em *ngIf="email.invalid && email.dirty && email?.errors.pattern"> Email not valid </em>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input formControlName="password"
+              id="password"
+              type="password"
+              class="form-control"
+              placeholder="Password..."
+              [ngClass]="{'is-invalid': password.invalid && password.dirty && (password?.errors.required || password?.errors.minlength)}"
+             />
+            <em *ngIf="password.invalid && password.dirty && password?.errors.required">  Required </em>
+            <em *ngIf="password.invalid && password.dirty && password?.errors.minlength">  Password should contain 8 characters </em>
+          </div>
+        </div>
+
+        <div class="text-center row">
+          <div class="col">
+            <button type="submit" [disabled]="registrationForm.invalid" class="btn btn-md btn-primary">Register</button>
+          </div>
+        </div>
+        <div class="col text-center login-link">
+          <p>Already have an account <span> <a class="login" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"   routerLink="/login"> Login Here </a> </span></p>
+        </div>
+      </form>
+    </div>
 </div>
-
-
-

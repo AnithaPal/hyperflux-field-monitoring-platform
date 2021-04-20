@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
@@ -36,12 +35,9 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  registerUser(formValues): void{
-
-    console.log(formValues);
+  registerUser(formValues: any): void{
     this.auth.registerUser(formValues).subscribe(
       data => {
-        console.log(data);
         this.router.navigate(['login'], { state: { message: 'Your Registration is successful. Login here...' } });
       },
       error => {

@@ -4,16 +4,17 @@ import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
-  selector: 'header',
+  selector: 'app-header',
   templateUrl: './header.component.html',
    styles: [`
    .navbar-custom {
        background-color: #1e1e20 !important;
+       border-bottom: 1px solid #606060;
    }
-    a {
-      color: $text-color;
-      text-decoration: underline;
-    }
+   .navbar-nav .nav-link {
+     color: #ccc;
+     text-decoration: underline;
+   }
 `]
 })
 

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 import { IUser, ITeam } from '../user.model';
 @Component({
-  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -26,17 +25,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.email = new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]);
+    this.email = new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
     this.password = new FormControl('', [Validators.required, Validators.minLength(8)]);
     this.loginForm = new FormGroup({
-        "email": this.email,
-        "password": this.password
+        email: this.email,
+        password: this.password
     });
   }
 
-  loginUser(formValues): void{
+  loginUser(formValues: { email: string; password: string }): void{
     this.successMessage = '';
-    console.log(formValues);
     this.auth.loginUser(formValues).subscribe(
       data => {
         this.currentUser =  data as IUser;
@@ -49,10 +47,10 @@ export class LoginComponent implements OnInit {
       },
       error => {
         console.error(error);
-        if(error.error.message ) {
+        if (error.error.message ) {
           this.errorMessage = error.error.message;
         }
-        else if(error.statusText === 'Not Found'){
+        else if (error.statusText === 'Not Found'){
           this.errorMessage = 'User not found in the system. Please register';
         }
       });
