@@ -1,11 +1,4 @@
-<div class="container-fluid" >
-  <div class="row">
-    <nav class="navbar navbar-default navbar-fixed-top header">
-        <fa-icon [icon]="faCircle" class="gi-3x float-left faCircle icon" ></fa-icon>
-        <fa-icon [icon]="faCircle" class="gi-3x float-right faCircle icon"></fa-icon>
-  </nav>
-  </div>
-</div>
+<app-hyperflux-header></app-hyperflux-header>
 <div class="row">
   <div class="col-2">
     <div class="sidebar-section">
@@ -29,7 +22,7 @@
   <div class="col-10">
     <div class="content-section" *ngIf="field">
       <div class="row">
-        <h1 class="pl-3">  VX Control Realys </h1>
+        <h1 class="pl-3">  VX Control Relays </h1>
       </div>
       <div class="row" >
         <div  [ngClass]="{'col-md-12': showOnlyTable === true, 'col-md-6': showRelayForm === true}" class ="col-xs-12 col-sm-12">

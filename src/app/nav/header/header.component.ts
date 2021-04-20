@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
-
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

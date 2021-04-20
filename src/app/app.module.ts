@@ -19,7 +19,8 @@ import {
 
 import {
    HeaderComponent,
-   SidebarComponent
+   SidebarComponent,
+   HyperfluxHeaderComponent
   } from './nav/index';
 
 import {
@@ -91,7 +92,8 @@ import { MatDialogModule} from '@angular/material/dialog';
     VSpaceUsagePipe,
     RelayComponent,
     RelayListComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    HyperfluxHeaderComponent
   ],
   providers: [
     AuthenticationService,

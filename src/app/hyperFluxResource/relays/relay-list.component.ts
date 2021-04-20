@@ -1,27 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HyperFluxService } from '../shared/hyper-flux-service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-
-import { IField, IRelay } from '../shared/field.model';
+import { IRelay, IField } from '../shared/field.model';
+import { IUser } from '../../user/user.model';
 import { faCircle,  faTrash, faPen, faAngleDoubleLeft, faAngleDoubleRight, faAngleRight, faAngleLeft} from '@fortawesome/free-solid-svg-icons';
-
 
 export enum RelayState {
   Flat = 'FLAT',
   inverted = 'INVERTED',
 }
-
 @Component({
   templateUrl: './relay-list.component.html',
   styleUrls:  ['./relay-list.component.scss']
 })
 
 export class RelayListComponent implements  OnInit{
-  relays ;
+  relays: IRelay[];
   currentRelay: IRelay;
   fieldId: number;
   faCircle = faCircle;
@@ -31,21 +28,19 @@ export class RelayListComponent implements  OnInit{
   faAngleDoubleRight = faAngleDoubleRight;
   faAngleRight = faAngleRight;
   faAngleLeft = faAngleLeft;
-  field;
+  field: IField;
   showRelayForm = false;
   showOnlyTable = true;
   relayId: number;
   relayState = RelayState;
-  currentUser;
+  currentUser: IUser;
   closeResult: string;
-
   relayForm: FormGroup;
   state: FormControl;
   strength: FormControl;
-
   page = 1;
   pageSize = 10;
-  collectionSize;
+  collectionSize: number;
 
 
   constructor(private hyperFluxService: HyperFluxService,
@@ -63,7 +58,7 @@ export class RelayListComponent implements  OnInit{
     if (this.fieldId ) {
       const joinedWithObject = forkJoin({
         field:   this.hyperFluxService.getField(this.fieldId),
-        relays: this.hyperFluxService.getRealys(this.fieldId)
+        relays: this.hyperFluxService.getRelays(this.fieldId)
       });
 
       joinedWithObject.subscribe(data => {
@@ -103,8 +98,8 @@ export class RelayListComponent implements  OnInit{
     this.showRelayForm = true;
   }
 
-  getRealys(fieldId: number): void {
-    this.hyperFluxService.getRealys(fieldId)
+  getRelays(fieldId: number): void {
+    this.hyperFluxService.getRelays(fieldId)
     .subscribe(
       data => {
         this.relays = data;
@@ -124,14 +119,13 @@ export class RelayListComponent implements  OnInit{
       error => {
         console.error(error);
       });
-
   }
 
   isOwner(): boolean{
     return this.currentUser.role === 'OWNER';
   }
 
-  open(content, relay): void {
+  open(content: string, relay: IRelay): void {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
       if (result === 'yes') {
@@ -150,8 +144,7 @@ export class RelayListComponent implements  OnInit{
     },
     error => {
       console.error(error);
-    })
-
+    });
   }
 
   refreshRelays(): void {

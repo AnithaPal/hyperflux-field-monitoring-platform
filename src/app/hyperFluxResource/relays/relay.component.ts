@@ -25,15 +25,15 @@ export class RelayComponent implements OnInit{
   }
 
   ngOnInit(): void{
-    this.getRealys(this.fieldId);
+    this.getRelays(this.fieldId);
   }
 
   navigateToRelayList(): void{
-    this.router.navigate([`fields/${this.fieldId}/relays`], { state: this.relays });
+    this.router.navigate([`fields/${this.fieldId}/relays`]);
   }
 
-  getRealys(fieldId: number): void {
-    this.hyperFluxService.getRealys(fieldId).subscribe(
+  getRelays(fieldId: number): void {
+    this.hyperFluxService.getRelays(fieldId).subscribe(
       data => {
         this.relays = data;
         this.relayCount = this.relays.length;

@@ -4,8 +4,8 @@ import { HyperFluxService } from '../shared/hyper-flux-service';
 import { ActivatedRoute } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { IField, IRelay } from '../shared/field.model';
+import { IUser } from '../../user/user.model';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
-
 @Component({
   templateUrl: './field-list.component.html',
   styleUrls: ['./field-list.component.scss']
@@ -17,12 +17,12 @@ export class FieldListComponent implements OnInit, OnDestroy  {
   vsPercentage: number;
   relayCoont: number;
   relays: IRelay[];
-  realyCount: number;
+  relayCount: number;
   fieldId: number;
   subscriptions: Subscription[] = [];
   showFieldForm = false;
   showStatus = true;
-  currentUser;
+  currentUser: IUser;
 
   fieldForm: FormGroup;
   connections: FormControl;
@@ -47,7 +47,6 @@ export class FieldListComponent implements OnInit, OnDestroy  {
     });
     this.subscriptions.push(interval(3000).subscribe(() => this.getFields()));
     this.setCurrentUser();
-
   }
 
   ngOnDestroy(): void {
@@ -80,12 +79,10 @@ export class FieldListComponent implements OnInit, OnDestroy  {
 
   isOwner(): boolean{
     return this.currentUser.role === 'OWNER';
-
   }
 
-
   private calculatePercentage(usage: number, limit: number): number {
-    return Math.round(usage * 100/ limit );
+    return Math.round(usage * 100 / limit );
   }
 
   private getFields(): void{

@@ -53,7 +53,7 @@ export class HyperFluxService {
     .pipe(catchError(this.handleError <IField[]>('getFields')));
   }
 
-  getRealys(id: number): Observable<IRelay[]> {
+  getRelays(id: number): Observable<IRelay[]> {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.bearerToken
