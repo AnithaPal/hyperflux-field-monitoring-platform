@@ -23,6 +23,7 @@ export class FieldListComponent implements OnInit, OnDestroy  {
   showFieldForm = false;
   showStatus = true;
   currentUser: IUser;
+  owner: boolean;
 
   fieldForm: FormGroup;
   connections: FormControl;
@@ -75,6 +76,7 @@ export class FieldListComponent implements OnInit, OnDestroy  {
 
   setCurrentUser(): void{
     this.currentUser = JSON.parse(localStorage.getItem('user'));
+    this.owner = this.isOwner();
   }
 
   isOwner(): boolean{

@@ -41,6 +41,7 @@ export class RelayListComponent implements  OnInit{
   page = 1;
   pageSize = 10;
   collectionSize: number;
+  owner: boolean;
 
 
   constructor(private hyperFluxService: HyperFluxService,
@@ -76,6 +77,7 @@ export class RelayListComponent implements  OnInit{
 
   setCurrentUser(): void{
     this.currentUser = JSON.parse(localStorage.getItem('user'));
+    this.owner = this.isOwner();
   }
 
   deleteRelay(relayId): void{

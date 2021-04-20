@@ -1,21 +1,7 @@
 <app-hyperflux-header></app-hyperflux-header>
 <div class="row" >
   <div class="col-md-2 col-lg-2 col-sm-12 shadow-sm p-3 mb-5 rounded">
-    <div class="sidebar-section">
-      <div class="sidebar-item sticky-top">
-        <div class="row">
-          <div class="px-1 position-fixed" id="sticky-sidebar">
-            <div class="nav flex-column flex-nowrap vh-100 overflow-auto text-white p-2">
-                <a  routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link" *ngIf="isOwner()"  routerLinkActive="active-link">Hyperflux Field</a>
-                <a  routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ fieldId, 'relays']"  class="nav-link" *ngIf="isOwner()"  routerLinkActive="active-link" >VX Control Relays</a>
-                <a href="./" class="nav-link" *ngIf="isOwner()"  routerLinkActive="active-link">User Management</a>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
+    <app-sidebar [owner] ="owner" [fieldId]="fieldId"> </app-sidebar>
   </div>
   <div class="col-md-10 col-sm-12" >
     <div class="content-section" >
@@ -33,7 +19,6 @@
               <h2 [ngClass]="{'critical': field.fluxStateWarning === true, 'normal': field.fluxStateWarning === false}" >  {{ field.fluxStateWarning  | fieldStatus }}</h2>
             </div>
           </div>
-
             <app-relay [fieldId] ="fieldId"></app-relay>
         </div>
         <div class="col-md-6  col-lg-6 col-sm-12">

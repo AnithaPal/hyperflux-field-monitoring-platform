@@ -7,7 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 
 export class SidebarComponent {
-
+  @Input() owner: boolean;
   @Input() fieldId: number;
-
 }

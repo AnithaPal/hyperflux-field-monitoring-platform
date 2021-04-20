@@ -1,22 +1,7 @@
 <app-hyperflux-header></app-hyperflux-header>
 <div class="row">
   <div class="col-2">
-    <div class="sidebar-section">
-      <div class="sidebar-item sticky-top">
-        <div class="row">
-          <div class="px-1 position-fixed" id="sticky-sidebar">
-            <div class="nav flex-column flex-nowrap vh-100 overflow-auto text-white p-2">
-                <a  routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link"  routerLinkActive="active-link">Hyperflux Field</a>
-                <a  routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ '/fields', fieldId, 'relays']"  class="nav-link sidebar-link"  routerLinkActive="active-link">VX Control Relays</a>
-                <a outerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ '/users', 'management']"  class="nav-link sidebar-link" *ngIf="isOwner()"  routerLinkActive="active-link">User Management</a>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
+    <app-sidebar [owner] ="owner"> </app-sidebar>
   </div>
 
   <div class="col-10">
@@ -96,8 +81,6 @@
     </div>
   </div>
 </div>
-
-
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header delete-modal" >
