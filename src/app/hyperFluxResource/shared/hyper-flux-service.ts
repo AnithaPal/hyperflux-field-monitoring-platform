@@ -75,8 +75,7 @@ export class HyperFluxService {
 
   }
 
-  saveField(id: number, fieldData: IField) {
-
+  saveField(id: number, fieldData: IField): Observable<IField> {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.bearerToken
@@ -88,7 +87,7 @@ export class HyperFluxService {
 
   }
 
-  saveRelay(id: number, relayData: IRelay) {
+  saveRelay(id: number, relayData: IRelay): Observable<IRelay> {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.bearerToken
