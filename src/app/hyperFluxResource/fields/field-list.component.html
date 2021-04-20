@@ -7,7 +7,7 @@
   </div>
 </div>
 <div class="row" >
-  <div class="col-2">
+  <div class="col-md-2 col-lg-2 col-sm-12 shadow-sm p-3 mb-5 rounded">
     <div class="sidebar-section">
       <div class="sidebar-item sticky-top">
         <div class="row">
@@ -24,15 +24,15 @@
       </div>
     </div>
   </div>
-  <div class="col-10" >
+  <div class="col-md-10 col-sm-12" >
     <div class="content-section" >
-      <div class="row">
-        <h1>  {{field.name }} </h1>
+      <div class="row ">
+        <h1 class="pl-3">  {{field.name }} </h1>
       </div>
       <div class="row">
-        <div class="col-6"  >
-          <div class="row field-status">
-            <h3 class="float-left"> Field Status</h3>
+        <div class="col-md-6  col-lg-6 col-sm-12"  >
+          <div class="row">
+            <h3 class="pl-3"> Field Status</h3>
           </div>
           <div class="card">
             <div class="card-body">
@@ -43,11 +43,11 @@
 
             <app-relay [fieldId] ="fieldId"></app-relay>
         </div>
-        <div class="col-6">
+        <div class="col-md-6  col-lg-6 col-sm-12">
           <div class="field-status" *ngIf="showStatus">
             <div class="row utilization-status">
               <div class="col">
-                <h3 class="float-left"> Utlization </h3>
+                <h3 class="float-left"> Utilization </h3>
               <button type="button" class="btn btn-dark btn-outline-info float-right vertical-center" (click)="showForm()">Edit</button>
               </div>
             </div>
@@ -113,7 +113,7 @@
             <div class="row">
               <div class="col">  <h1> Editing {{field.name}} </h1> </div>
             </div>
-            <div class="row" class="vh-100">
+            <div class="row" class="vh-100 wrapper">
               <div class="col">
                 <form [formGroup]="fieldForm" (ngSubmit)=saveField(fieldForm.value) >
                   <div class="mh-100">
@@ -139,7 +139,7 @@
                     </div>
                   </div>
 
-                  <div class="row sticky-bottom  action-div">
+                  <div class="row  fixed-bottom action-div">
                     <div class="col-12 d-flex justify-content-end">
                       <button class="btn btn-md btn-default  mr-1" (click)="cancel()"> Cancel</button>
                       <button class="btn btn-md btn-primary  mr-1" [disabled]="fieldForm.invalid"  > Save</button>

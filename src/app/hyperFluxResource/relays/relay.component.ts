@@ -8,13 +8,9 @@ import { IRelay } from '../shared/field.model';
   templateUrl: './relay.component.html',
   styles: [
     `
-    .card {
-      background-color: #282829;
-      margin: 0px 0px 10px 0px;
-    }
-    .utilization-status {
-      padding-left: 16px;
-      position: relative;
+    .btn-dark {
+      background-color: #1e1e20;
+      font-size: 14px;
     }
     `
   ]
