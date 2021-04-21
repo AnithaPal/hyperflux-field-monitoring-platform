@@ -1,99 +1,92 @@
-<app-hyperflux-header></app-hyperflux-header>
-<div class="row">
-  <div class="col-2">
-    <app-sidebar [owner] ="owner"> </app-sidebar>
-  </div>
-
-  <div class="col-10">
-    <div class="content-section" *ngIf="field">
-      <div class="row">
-        <h1 class="pl-3">  VX Control Relays </h1>
-      </div>
-      <div class="row" >
-        <div  [ngClass]="{'col-md-12': showOnlyTable === true, 'col-md-6': showRelayForm === true}" class ="col-xs-12 col-sm-12">
-          <table class="table table-dark  table-borderless  ">
-            <thead  class="table-header">
-              <tr>
-                <th scope="col" class="text-left" >ID</th>
-                <th scope="col" class="text-left" >FIELD</th>
-                <th scope="col" class="text-left">BUGHORKIN STATE</th>
-                <th scope="col" class="text-left">STRENGTH(VUPS)</th>
-                <th *ngIf="isOwner()" scope="col" class="text-center"> </th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let relay of field.relays | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ">
-              <tr>
-                <td class="text-left" >{{relay.id}} </td>
-                <td class="text-left"> {{field.name}}</td>
-                <td class="text-left"> {{relay.state | titlecase }}</td>
-                <td class="text-left"> {{relay.strength}}</td>
-                <td class="text-left" *ngIf="isOwner()">
-                  <fa-icon [icon]="faPencil" class="float-left faCircle" (click)="editRelay(relay)" ></fa-icon>
-                  <fa-icon [icon]="faTrash" class="float-right faCircle" (click)="open(content, relay)"></fa-icon>
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshRelays()" >
-                <ng-template ngbPaginationFirst>  <fa-icon [icon]="faAngleLeft" class=" faAngleLeft" ></fa-icon> </ng-template>
-                <ng-template ngbPaginationLast>   <fa-icon [icon]="faAngleRight" class=" faAngleRight" ></fa-icon></ng-template>
-                <ng-template ngbPaginationPrevious>    <fa-icon [icon]="faAngleDoubleLeft" class=" faAngleDoubleLeft" ></fa-icon> </ng-template>
-                <ng-template ngbPaginationNext>   <fa-icon [icon]="faAngleDoubleRight" class=" faAngleDoubleRight" ></fa-icon> </ng-template>
-              </ngb-pagination>
-            </tfoot>
-          </table>
-
-
-        </div>
-          <div *ngIf="showRelayForm" [ngClass]="{'col-6': showOnlyTable === false && showRelayForm === true }">
-            <div class="row" *ngIf="currentRelay">  <h1> Editing Control Relay {{currentRelay.id}} </h1> </div>
-            <div clas="row">
-              <form [formGroup]="relayForm" (ngSubmit)=saveRelay(relayForm.value)>
-                <div class="mh-100">
-                  <div class="form-group">
-                    <label for="state">State</label>
-                    <select formControlName="state" id="state"  class="form-control selectpicker" data-style="btn-primary">
-                      <option class="state-option" *ngFor="let state of relayState | keyvalue" [ngValue]="state.value" >{{state.value}}</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="strength"> Strength (Vups) </label>
-                    <input formControlName="strength" id="strength" type="number" class="form-control" [ngClass]="{'is-invalid': strength.invalid && strength.dirty && (strength?.errors.required || strength?.errors.max || strength?.errors.min)}">
-                    <em *ngIf="strength.invalid && strength.dirty && strength?.errors.required"> Required </em>
-                    <em *ngIf="strength.invalid && strength.dirty && (strength?.errors.max || strength?.errors.min) "> Strength should be from 0 to 10 </em>
-                  </div>
-                </div>
-
-                <div class="row sticky-bottom  action-div">
-                  <div class="col-12 d-flex justify-content-end">
-                    <button class="btn btn-md btn-default  mr-1" (click)="cancel()"> Cancel</button>
-                    <button class="btn btn-md btn-primary  mr-1" [disabled]="relayForm.invalid"> Save</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-
-          </div>
-
-
-      </div>
+<div class="overflow-hidden">
+  <app-hyperflux-header></app-hyperflux-header>
+  <div class="row vh-100 overflow-auto">
+    <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-dark d-flex sticky-top">
+      <app-sidebar [owner] ="owner"> </app-sidebar>
     </div>
+    <div class="col d-flex flex-column h-sm-100">
+      <main class="overflow-auto" *ngIf="field">
+        <div class="col">
+          <h1 class="pl-3">VX Control Relays</h1>
+          <div class="row" >
+            <div  [ngClass]="{'col-md-12': showOnlyTable === true, 'col-md-6': showRelayForm === true}" class ="col-xs-12 col-sm-12">
+              <table class="table table-dark  table-borderless  ">
+                <thead  class="table-header">
+                  <tr>
+                    <th scope="col" class="text-left" >ID</th>
+                    <th scope="col" class="text-left" >FIELD</th>
+                    <th scope="col" class="text-left">BUGHORKIN STATE</th>
+                    <th scope="col" class="text-left">STRENGTH(VUPS)</th>
+                    <th *ngIf="isOwner()" scope="col" class="text-center"> </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let relay of field.relays | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ">
+                  <tr>
+                    <td class="text-left" >{{relay.id}} </td>
+                    <td class="text-left"> {{field.name}}</td>
+                    <td class="text-left"> {{relay.state | titlecase }}</td>
+                    <td class="text-left"> {{relay.strength}}</td>
+                    <td class="text-left" *ngIf="isOwner()">
+                      <fa-icon [icon]="faPencil" class="float-left faCircle" (click)="editRelay(relay)" ></fa-icon>
+                      <fa-icon [icon]="faTrash" class="float-right faCircle" (click)="open(content, relay)"></fa-icon>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshRelays()" >
+                    <ng-template ngbPaginationFirst> <fa-icon [icon]="faAngleLeft" class=" faAngleLeft" ></fa-icon> </ng-template>
+                    <ng-template ngbPaginationLast> <fa-icon [icon]="faAngleRight" class=" faAngleRight" ></fa-icon></ng-template>
+                    <ng-template ngbPaginationPrevious> <fa-icon [icon]="faAngleDoubleLeft" class=" faAngleDoubleLeft" ></fa-icon> </ng-template>
+                    <ng-template ngbPaginationNext> <fa-icon [icon]="faAngleDoubleRight" class=" faAngleDoubleRight" ></fa-icon> </ng-template>
+                  </ngb-pagination>
+                </tfoot>
+              </table>
+            </div>
+              <div *ngIf="showRelayForm" [ngClass]="{'col-6': showOnlyTable === false && showRelayForm === true }">
+                <div class="row" *ngIf="currentRelay">  <h1> Editing Control Relay {{currentRelay.id}} </h1> </div>
+                <div clas="row">
+                  <form [formGroup]="relayForm" (ngSubmit)=saveRelay(relayForm.value)>
+                    <div class="mh-100">
+                      <div class="form-group">
+                        <label for="state">State</label>
+                        <select formControlName="state" id="state"  class="form-control selectpicker" data-style="btn-primary">
+                          <option class="state-option" *ngFor="let state of relayState | keyvalue" [ngValue]="state.value" >{{state.value}}</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="strength"> Strength (Vups) </label>
+                        <input formControlName="strength" id="strength" type="number" class="form-control" [ngClass]="{'is-invalid': strength.invalid && strength.dirty && (strength?.errors.required || strength?.errors.max || strength?.errors.min)}">
+                        <em *ngIf="strength.invalid && strength.dirty && strength?.errors.required"> Required </em>
+                        <em *ngIf="strength.invalid && strength.dirty && (strength?.errors.max || strength?.errors.min) "> Strength should be from 0 to 10 </em>
+                      </div>
+                    </div>
+                    <div class="row sticky-bottom  action-div">
+                      <div class="col-12 d-flex justify-content-end">
+                        <button class="btn btn-md btn-default  mr-1" (click)="cancel()"> Cancel</button>
+                        <button class="btn btn-md btn-primary  mr-1" [disabled]="relayForm.invalid"> Save</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header delete-modal" >
+          <h4 class="modal-title" id="modal-basic-title"> Delete Confirmation</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <p>Are you sure to delete this relay?</p>
+      </div>
+      <div class="modal-footer center">
+          <button type="button" class="btn btn-default" (click)="d('Cross click')">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="c('yes')">Delete</button>
+      </div>
+    </ng-template>
   </div>
 </div>
-
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header delete-modal" >
-      <h4 class="modal-title" id="modal-basic-title"> Delete Confirmation</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-          <span aria-hidden="true">×</span>
-      </button>
-  </div>
-  <div class="modal-body">
-      <p>Are you sure to delete this relay?</p>
-  </div>
-  <div class="modal-footer center">
-      <button type="button" class="btn btn-default" (click)="d('Cross click')">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="c('yes')">Delete</button>
-  </div>
-</ng-template>

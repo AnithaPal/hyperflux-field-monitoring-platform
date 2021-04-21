@@ -13,11 +13,6 @@ body {
   color: $text-color
 }
 
-.card {
-  background-color: $dark-background;
-  margin: 0px 0px 10px 0px;
-}
-
 .critical {
   color: $alert-danger-color;
   font-size: 30px;
@@ -25,7 +20,7 @@ body {
 }
 
 .field-form {
-  background-color: $darker-background;
+  background-color: $form-background;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
