@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IRelay, IField } from '../shared/field.model';
-import { IUser } from '../../user/user.model';
+import { ITeam, IUser } from '../../user/user.model';
 import { faCircle,  faTrash, faPen, faAngleDoubleLeft, faAngleDoubleRight, faAngleRight, faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 
 export enum RelayState {
@@ -42,6 +42,7 @@ export class RelayListComponent implements  OnInit{
   pageSize = 10;
   collectionSize: number;
   owner: boolean;
+  teamId: ITeam;
 
 
   constructor(private hyperFluxService: HyperFluxService,
@@ -66,6 +67,8 @@ export class RelayListComponent implements  OnInit{
           this.field = data.field;
           this.field.relays = data.relays;
           this.collectionSize = data.relays.length;
+      }, error => {
+        console.error(error);
       });
     }
   }
@@ -78,6 +81,7 @@ export class RelayListComponent implements  OnInit{
   setCurrentUser(): void{
     this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.owner = this.isOwner();
+    this.teamId = this.currentUser.team;
   }
 
   deleteRelay(relayId): void{
@@ -100,28 +104,7 @@ export class RelayListComponent implements  OnInit{
     this.showRelayForm = true;
   }
 
-  getRelays(fieldId: number): void {
-    this.hyperFluxService.getRelays(fieldId)
-    .subscribe(
-      data => {
-        this.relays = data;
-        this.field.relays = this.relays;
-      },
-      error => {
-        console.error(error);
-      });
-  }
 
-  getField(fieldId: number): void {
-    this.hyperFluxService.getField(fieldId)
-    .subscribe(
-      data => {
-        this.field = data;
-      },
-      error => {
-        console.error(error);
-      });
-  }
 
   isOwner(): boolean{
     return this.currentUser.role === 'OWNER';

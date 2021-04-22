@@ -1,67 +1,122 @@
-
-
-<mat-toolbar color="primary" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-  <mat-toolbar-row>
-    <button mat-icon-button layout="row" layout-align="start center" flex>
-        <fa-icon [icon]="faCircle" class="gi-3x float-right faCircle icon" (click)="sidenav.toggle()"></fa-icon>
-    </button>
-    <span class="menu-spacer"></span>
-    <div>
-      <fa-icon [icon]="faCircle" class="gi-3x  faCircle icon"></fa-icon>
+<div class="overflow-hidden">
+  <app-hyperflux-header></app-hyperflux-header>
+  <div class="row vh-100 overflow-auto">
+    <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-dark d-flex sticky-top custom-sidebar">
+      <app-sidebar [owner] ="owner" [fieldId]="fieldId"> </app-sidebar>
     </div>
-  </mat-toolbar-row>
+    <div class="col d-flex flex-column h-sm-100">
+      <main class="overflow-auto" *ngIf="team" >
+        <div class="col">
+          <h1 class="pt-3"> User Management </h1>
+          <div class="row" >
+            <div  [ngClass]="{'col-md-12': showOnlyTable === true, 'col-md-6': showUserForm === true}" class ="col-xs-12 col-sm-12">
+              <table class="table table-dark  table-borderless  ">
+                <thead  class="table-header">
+                  <tr>
+                    <th scope="col" class="text-left" >Name</th>
+                    <th scope="col" class="text-left" >Email </th>
+                    <th scope="col" class="text-left">Team</th>
+                    <th scope="col" class="text-left">Role</th>
+                    <th  scope="col" class="text-center"> </th>
+                  </tr>
+                </thead>
 
-</mat-toolbar>
-<mat-sidenav-container>
-  <mat-sidenav #sidenav>
-    <mat-nav-list>
+                <tbody *ngFor = "let user of team.users" >
+                  <tr>
+                    <td class="text-left" >{{user.displayName}} </td>
+                    <td class="text-left" >{{user.email}} </td>
+                    <td class="text-left" >{{team.name}} </td>
+                    <td class="text-left" >{{user.role}} </td>
+                    <td class="text-left">
+                      <fa-icon [icon]="faPencil" class="float-left faCircle" (click)="editUser(user)" ></fa-icon>
+                      <fa-icon [icon]="faTrash" class="float-right faCircle" (click)="open(content, user)"></fa-icon>
+                    </td>
+                  </tr>
+                </tbody>
+                <!-- <tfoot>
+                  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshUsers()" >
+                    <ng-template ngbPaginationFirst> <fa-icon [icon]="faAngleLeft" class=" faAngleLeft" ></fa-icon> </ng-template>
+                    <ng-template ngbPaginationLast> <fa-icon [icon]="faAngleRight" class=" faAngleRight" ></fa-icon></ng-template>
+                    <ng-template ngbPaginationPrevious> <fa-icon [icon]="faAngleDoubleLeft" class=" faAngleDoubleLeft" ></fa-icon> </ng-template>
+                    <ng-template ngbPaginationNext> <fa-icon [icon]="faAngleDoubleRight" class=" faAngleDoubleRight" ></fa-icon> </ng-template>
+                  </ngb-pagination>
+                </tfoot> -->
+              </table>
+            </div>
+            <div *ngIf="showUserForm" [ngClass]="{'col-6': showOnlyTable === false && showUserForm === true }" class="form">
+              <div class="row" *ngIf="user">  <h1 class="pl-3"> Editing {{user.displayName}} </h1> </div>
+              <div >
+                <form [formGroup]="userForm" (ngSubmit)=saveUser(userForm.value)>
+                  <div>
+                    <div formGroupName="user">
+                      <div class="form-group">
+                        <label for="displayName">Name</label>
+                        <input formControlName="displayName"
+                          id="displayName"
+                          type="text"
+                          class="form-control"
+                          placeholder="Display Name..."
+                          [ngClass]="{'is-invalid': displayName.invalid && displayName.dirty && (displayName?.errors.required || displayName?.errors.maxlength || displayName?.errors.minlength) }"
+                        />
+                        <em *ngIf="displayName.invalid && displayName.dirty && displayName?.errors.required">  Required </em>
+                        <em *ngIf="displayName.invalid && displayName.dirty && displayName?.errors.maxlength"> Can't exceed 15 characters </em>
+                        <em *ngIf="displayName.invalid && displayName.dirty && displayName?.errors.minlength"> Display Name should contain 4 characters </em>
+                      </div>
 
-      <a  mat-list-item routerLinkActive="active"
-      [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link"  routerLinkActive="active-link">Hyperflux Field</a>
-      <a mat-list-item routerLinkActive="active"
-      [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/fields']" class="nav-link sidebar-link"  routerLinkActive="active-link"> Vx Control Relays </a>
-      <a outerLinkActive="active"
-      [routerLinkActiveOptions]="{exact: true}" [routerLink]="[ '/users', 'management']"  class="nav-link sidebar-link"   routerLinkActive="active-link"> User Management </a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div style="height: 88vh;">
-      <table mat-table [dataSource]="dataSource" matSort  class="mat-table mat-elevation-z0" >
-        <ng-container matColumnDef="displayName">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let user"> {{user.displayName}} </td>
-        </ng-container>
+                      <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input formControlName="email"
+                            id="email"
+                            class="form-control"
+                            placeholder="Email..."
+                            [ngClass]="{'is-invalid': email.invalid && email.dirty && (email?.errors.required || email?.errors.pattern )}"
+                            />
+                        <em *ngIf="email.invalid && email.dirty && email?.errors.required"> Required </em>
+                        <em *ngIf="email.invalid && email.dirty && email?.errors.pattern"> Email not valid </em>
+                      </div>
 
+                      <div class="form-group">
+                        <label for="role">Role</label>
+                        <select formControlName="role" id="role"  class="form-control selectpicker" data-style="btn-primary">
+                          <option class="role-option" *ngFor="let role of userRole | keyvalue" [ngValue]="role.value" >{{role.value}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div formGroupName="team">
+                      <div class="form-group">
+                        <label for="name">Team</label>
+                        <input formControlName="name" id="name" class="form-control" readonly/>
+                      </div>
+                    </div>
+                  </div>
 
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let user"> {{user.email}} </td>
-        </ng-container>
+                  <div class="row sticky-bottom  action-div">
+                    <div class="col-12 d-flex justify-content-end">
+                      <button class="btn btn-md btn-default  mr-1" (click)="cancel()"> Cancel</button>
+                      <button class="btn btn-md btn-primary  mr-1" [disabled]="userForm.invalid"> Save</button>
+                    </div>
+                  </div>
+                </form>
 
-
-        <ng-container matColumnDef="team">
-          <th mat-header-cell *matHeaderCellDef> Team </th>
-          <td mat-cell *matCellDef="let user"> {{user.team}} </td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef> Role </th>
-          <td mat-cell *matCellDef="let user"> {{user.role}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef> Action </th>
-          <td mat-cell *matCellDef="let user">
-            <mat-icon   mat-raised-button (click)="openDialog()" >edit</mat-icon>
-            <mat-icon  >delete</mat-icon>  </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-      </table>
-
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+   </div>
+   <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header delete-modal" >
+        <h4 class="modal-title" id="modal-basic-title"> Delete Confirmation</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <div class="modal-body">
+        <p>Are you sure to delete this user?</p>
+    </div>
+    <div class="modal-footer center">
+        <button type="button" class="btn btn-default" (click)="d('Cross click')">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="c('yes')">Delete</button>
+    </div>
+  </ng-template>
+</div>

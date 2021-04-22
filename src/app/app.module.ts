@@ -14,7 +14,8 @@ import {
   RegistrationComponent,
   AuthenticationService,
   LoginComponent,
-  UserManagementComponent
+  UserManagementComponent,
+  ValidUser
  } from './user/index';
 
 import {
@@ -73,7 +74,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthenticationService,
     HasValidToken,
     HyperFluxService,
-    FieldListResolver
+    FieldListResolver,
+    ValidUser
    ],
   bootstrap: [HyperfluxComponent]
 })

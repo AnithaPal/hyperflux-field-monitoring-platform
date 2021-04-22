@@ -4,7 +4,7 @@ import { HyperFluxService } from '../shared/hyper-flux-service';
 import { ActivatedRoute } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { IField, IRelay } from '../shared/field.model';
-import { IUser } from '../../user/user.model';
+import { ITeam, IUser } from '../../user/user.model';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 @Component({
   templateUrl: './field-list.component.html',
@@ -24,6 +24,7 @@ export class FieldListComponent implements OnInit, OnDestroy  {
   showStatus = true;
   currentUser: IUser;
   owner: boolean;
+  teamId: ITeam;
 
   fieldForm: FormGroup;
   connections: FormControl;
@@ -77,6 +78,7 @@ export class FieldListComponent implements OnInit, OnDestroy  {
   setCurrentUser(): void{
     this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.owner = this.isOwner();
+    this.teamId = this.currentUser.team;
   }
 
   isOwner(): boolean{

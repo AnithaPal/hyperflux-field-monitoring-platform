@@ -55,6 +55,15 @@ body {
   padding: 1em;
 }
 
+.close {
+  color: $text-color;
+}
+
+.custom-sidebar{
+  background-color: #282829;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
 em {
   color: #f47e7e; padding-left: 2px;
 }
@@ -106,6 +115,11 @@ html { height: 100%; }
   color: #ffffff;
 }
 
+.form {
+  background-color: $form-background;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
 .form-control {
   background-color: rgba(196, 196, 196, 0);
   margin: auto;
@@ -114,6 +128,12 @@ html { height: 100%; }
   border-radius: 5px;
   border: solid 1px #606060;
   color: $text-color;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: #e9ecef;
+  border: solid 1px rgba(96, 96, 96, 0.5);
+  opacity: 1;
 }
 
 .form-control:focus {
@@ -130,4 +150,21 @@ html { height: 100%; }
   border-radius: 5px;
   box-shadow: inset 0 1px 1px #cccc, 0 0 4px #cccc;
   color: $text-color;
+}
+
+.modal-header {
+  background-color: $dark-background !important;
+  border: $dark-background;
+  color: $text-color;
+}
+
+.modal-body {
+  background-color: $dark-background !important;
+  border: $dark-background;
+  color: $text-color;
+}
+
+.modal-footer {
+  border: $dark-background;
+  background-color:  #333333;
 }

@@ -1,13 +1,13 @@
 <div class="overflow-hidden">
   <app-hyperflux-header></app-hyperflux-header>
   <div class="row vh-100 overflow-auto">
-    <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-dark d-flex sticky-top">
-      <app-sidebar [owner] ="owner"> </app-sidebar>
+    <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 custom-sidebar d-flex sticky-top">
+      <app-sidebar [owner] ="owner" [teamId]="teamId"> </app-sidebar>
     </div>
     <div class="col d-flex flex-column h-sm-100">
       <main class="overflow-auto" *ngIf="field">
         <div class="col">
-          <h1 class="pl-3">VX Control Relays</h1>
+          <h1 class="pt-3">VX Control Relays</h1>
           <div class="row" >
             <div  [ngClass]="{'col-md-12': showOnlyTable === true, 'col-md-6': showRelayForm === true}" class ="col-xs-12 col-sm-12">
               <table class="table table-dark  table-borderless  ">
@@ -42,8 +42,8 @@
                 </tfoot>
               </table>
             </div>
-              <div *ngIf="showRelayForm" [ngClass]="{'col-6': showOnlyTable === false && showRelayForm === true }">
-                <div class="row" *ngIf="currentRelay">  <h1> Editing Control Relay {{currentRelay.id}} </h1> </div>
+              <div *ngIf="showRelayForm" [ngClass]="{'col-6': showOnlyTable === false && showRelayForm === true }" class="form">
+                <div class="row" *ngIf="currentRelay">  <h1 class="pl-3"> Editing Control Relay {{currentRelay.id}} </h1> </div>
                 <div clas="row">
                   <form [formGroup]="relayForm" (ngSubmit)=saveRelay(relayForm.value)>
                     <div class="mh-100">

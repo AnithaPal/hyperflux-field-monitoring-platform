@@ -1,11 +1,11 @@
 <div class="overflow-hidden">
   <div class="row vh-100 overflow-auto">
-    <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-dark d-flex sticky-top">
-      <app-sidebar [owner] ="owner" [fieldId]="fieldId"> </app-sidebar>
+    <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 custom-sidebar d-flex sticky-top">
+      <app-sidebar [owner] ="owner" [fieldId]="fieldId" [teamId]="teamId"> </app-sidebar>
     </div>
     <div class="col d-flex flex-column h-sm-100">
       <main class="overflow-auto">
-        <h1 class="pl-3">  {{field.name }} </h1>
+        <h1 class="pt-2">  {{field.name }} </h1>
         <div class="row">
           <div class="col-md-6  col-lg-6 col-sm-12"  >
             <div class="row">
@@ -85,9 +85,9 @@
                 </div>
               </div>
             </div>
-            <div class="field-form" *ngIf="showFieldForm">
+            <div class="field-form" *ngIf="showFieldForm"  class="form">
               <div class="row">
-                <div class="col">  <h1> Editing {{field.name}} </h1> </div>
+                <div class="col">  <h1 class="pl-3"> Editing {{field.name}} </h1> </div>
               </div>
               <div class="row" class="vh-100 wrapper">
                 <div class="col">

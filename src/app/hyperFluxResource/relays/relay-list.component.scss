@@ -1,27 +1,6 @@
 @import '../../../assets/variables.scss';
 @import '../../../assets/customize-bootstrap.scss';
 
-.close {
-  color: $text-color;
-}
-
-.modal-header {
-  background-color: $dark-background !important;
-  border: $dark-background;
-  color: $text-color;
-}
-
-.modal-body {
-  background-color: $dark-background !important;
-  border: $dark-background;
-  color: $text-color;
-}
-
-.modal-footer {
-  border: $dark-background;
-  background-color:  #333333;
-}
-
 .sticky {
   position: relative;
   position: -webkit-sticky;
