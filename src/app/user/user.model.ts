@@ -10,7 +10,6 @@ export interface IUser {
   createdAt:	Date;
   updatedAt: Date;
 }
-
 export interface ITeam {
   id:	number;
   name: string;

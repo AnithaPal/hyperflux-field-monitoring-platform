@@ -38,7 +38,7 @@ body {
 }
 
 .card {
-  background-color: $card-background;
+  background-color: $gray-background;
   margin: 0px 0px 10px 0px;
 }
 
@@ -116,7 +116,7 @@ html { height: 100%; }
 }
 
 .form {
-  background-color: $form-background;
+  background-color: $charcoal;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -131,7 +131,7 @@ html { height: 100%; }
 }
 
 .form-control:disabled, .form-control[readonly] {
-  background-color: #e9ecef;
+  background-color: $gray;
   border: solid 1px rgba(96, 96, 96, 0.5);
   opacity: 1;
 }

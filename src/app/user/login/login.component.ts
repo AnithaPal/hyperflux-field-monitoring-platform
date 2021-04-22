@@ -15,9 +15,6 @@ export class LoginComponent implements OnInit {
   password: FormControl;
   errorMessage: string;
   successMessage: string;
-  securityToken: string;
-  securityExpiration: Date;
-  team: ITeam;
   currentUser: IUser;
 
   constructor(private auth: AuthenticationService, private router: Router){
@@ -40,11 +37,7 @@ export class LoginComponent implements OnInit {
       data => {
         this.currentUser =  data as IUser;
         localStorage.setItem('user', JSON.stringify(this.currentUser));
-        this.securityToken = data.securityToken;
-        this.securityExpiration = data.securityTokenExpiration;
-        this.team = data.team as ITeam;
         this.router.navigate(['fields']);
-
       },
       error => {
         console.error(error);

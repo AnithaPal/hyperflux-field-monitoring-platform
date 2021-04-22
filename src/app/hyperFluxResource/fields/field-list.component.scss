@@ -3,7 +3,7 @@
 
 
 .action-div {
-  background-color: #333333;
+  background-color: $gray-background;
   padding: 20px 0;
   margin: 2px;
 }
@@ -19,31 +19,18 @@ body {
   font-weight: bolder;
 }
 
-.field-form {
-  background-color: $form-background;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-}
-
-.float-left {
-  float: left;
-}
-
 .normal {
   font-size: 30px;
   font-weight: bolder;
 }
 
-.padding-bottom {
-  padding-bottom: 10px;
-}
-
-.p-bar{
+.p-bar {
   width: 90%;
   float: left;
   padding-top:5px;
 }
 
-.p-label{
+.p-label {
 width: 10%;
 float: left;
 padding-left: 5px;

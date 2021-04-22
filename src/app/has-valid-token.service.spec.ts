@@ -2,11 +2,12 @@ import { HasValidToken } from './has-valid-token.service';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+
 describe('HasValidToken', () => {
-  let router;
-  let service;
+  let router: any;
+  let service: any;
   const initTestModule = (initialState = {}) => {
-    let routerMock = {
+    const routerMock = {
       navigate: jasmine.createSpy('navigate').and.resolveTo()
     };
     TestBed.configureTestingModule({
@@ -24,9 +25,11 @@ describe('HasValidToken', () => {
   beforeEach(() => {
     initTestModule();
   });
+
   it('should should exist', () => {
     expect(service).toBeTruthy();
   });
+
   it('should reroute to login page', () => {
     const twoHoursAgo = new Date();
     twoHoursAgo.setFullYear(twoHoursAgo.getHours() - 2);
@@ -35,6 +38,7 @@ describe('HasValidToken', () => {
     expect(service.canActivate()).toEqual(false);
     expect(router.navigate).toHaveBeenCalled();
   });
+
   it('should return true', () => {
     const oneHourFromNow = new Date();
     oneHourFromNow.setHours(oneHourFromNow.getHours() + 1);

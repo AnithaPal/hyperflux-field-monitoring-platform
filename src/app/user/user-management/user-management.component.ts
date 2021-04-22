@@ -138,7 +138,6 @@ export class UserManagementComponent implements OnInit {
       this.ngOnInit();
      },
      error => {
-       debugger
       console.error(error);
      });
    }

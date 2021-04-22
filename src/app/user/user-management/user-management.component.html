@@ -43,7 +43,7 @@
               </div>
             </div>
               <div *ngIf="showUserForm" [ngClass]="{'col-6': showOnlyTable === false && showUserForm === true }" class="form">
-                <div class="row" *ngIf="user">  <h1 class="pl-3"> Editing {{user.id}} </h1> </div>
+                <div class="row" *ngIf="user">  <h1 class="pl-3"> Editing {{user.displayName}} </h1> </div>
                 <div clas="row">
                   <form [formGroup]="userForm" (ngSubmit)=saveUser(userForm.value)>
                     <div>

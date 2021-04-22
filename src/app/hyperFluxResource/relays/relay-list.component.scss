@@ -9,14 +9,14 @@
 }
 
 option:not(:checked) {
-  background-color: #222222;
+  background-color: $graphite;
   color: $text-color;
 }
 ngb-pagination ::ng-deep ul > li:not(.active) > a {
   background-color: #333333 !important;
 }
 
-.table, thead { border: 1px solid  #606060; }
+.table, thead { border: 1px solid $secondary-color; }
 
 thead  th{
   font-weight:lighter;

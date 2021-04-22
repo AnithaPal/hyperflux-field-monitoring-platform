@@ -20,7 +20,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.displayName = new FormControl('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]);
-    this.email = new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]);
+    this.email = new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
     this.name = new FormControl('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]);
     this.password = new FormControl('', [Validators.required, Validators.minLength(8)]);
     this.registrationForm = new FormGroup({
@@ -42,11 +42,9 @@ export class RegistrationComponent implements OnInit {
       },
       error => {
         console.error(error);
-        if(error.error.message) {
+        if (error.error.message) {
           this.errorMessage = error.error.message;
         }
       });
   }
-
-
 }

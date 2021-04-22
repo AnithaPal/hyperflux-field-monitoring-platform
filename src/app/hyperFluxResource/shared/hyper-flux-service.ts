@@ -59,7 +59,7 @@ export class HyperFluxService {
    });
 
     return this.http.get<any[]>('http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/fields', { headers: reqHeader })
-    .pipe(catchError(this.handleError <IField[]>('getFields')));
+    .pipe(catchError(this.handleError <IField[]>('getFields', [])));
   }
 
   getRelays(id: number): Observable<IRelay[]> {
@@ -69,7 +69,7 @@ export class HyperFluxService {
    });
 
     return this.http.get<any[]>(`http://hyperflux.herokuapp.com/hyperflux/api/v1/flux/fields/${id}/relays`, { headers: reqHeader })
-    .pipe(catchError(this.handleError <IRelay[]>('getRelays')));
+    .pipe(catchError(this.handleError <IRelay[]>('getRelays', [])));
 
   }
 
