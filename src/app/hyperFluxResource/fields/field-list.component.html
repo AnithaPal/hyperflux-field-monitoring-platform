@@ -1,4 +1,5 @@
 <div class="overflow-hidden">
+  <app-hyperflux-header></app-hyperflux-header>
   <div class="row vh-100 overflow-auto">
     <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 custom-sidebar d-flex sticky-top">
       <app-sidebar [owner] ="owner" [fieldId]="fieldId" [teamId]="teamId"> </app-sidebar>
@@ -9,7 +10,7 @@
         <div class="row">
           <div class="col-md-6  col-lg-6 col-sm-12"  >
             <div class="row">
-              <h3 class="pl-3"> Field Status</h3>
+              <h3 class="pl-3 pt-3"> Field Status</h3>
             </div>
             <div class="card">
               <div class="card-body">
@@ -23,7 +24,7 @@
             <div class="field-status" *ngIf="showStatus">
               <div class="row utilization-status">
                 <div class="col">
-                  <h3 class="float-left"> Utilization </h3>
+                  <h3 class="float-left pt-3"> Utilization </h3>
                 <button type="button" class="btn btn-dark btn-outline-info float-right vertical-center" (click)="showForm()">Edit</button>
                 </div>
               </div>

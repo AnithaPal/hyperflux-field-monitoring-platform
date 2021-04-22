@@ -8,6 +8,7 @@ import { FieldListResolver } from '../app/hyperFluxResource/field-list-resolver.
 import { RelayListComponent } from '../app/hyperFluxResource/relays/relay-list.component';
 import { UserManagementComponent } from '../app/user/user-management/user-management.component';
 import { ValidUser } from './user';
+import { Error404Component } from './common/errors/404.component';
 
 export const appRoutes: Routes = [
   { path: '', component: RegistrationComponent},
@@ -15,5 +16,7 @@ export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'fields', component: FieldListComponent, canActivate: [HasValidToken], resolve: { fields: FieldListResolver }},
   { path: 'fields/:id/relays', component: RelayListComponent, canActivate: [HasValidToken] },
-  { path: 'teams/:id/users', component: UserManagementComponent, canActivate: [HasValidToken, ValidUser] }
+  { path: 'teams/:id/users', component: UserManagementComponent, canActivate: [HasValidToken, ValidUser] },
+  { path: '404', component: Error404Component  },
+  { path: '**', redirectTo: '/404'}
 ];

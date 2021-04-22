@@ -13,7 +13,7 @@ export enum UserRole {
 }
 @Component({
   templateUrl: './user-management.component.html',
-   styleUrls: ['./user-management.component.scss']
+  styleUrls: ['./user-management.component.scss']
 })
 
 export class UserManagementComponent implements OnInit {
@@ -132,12 +132,12 @@ export class UserManagementComponent implements OnInit {
      const id = this.user.id;
 
      this.hyperFluxService.saveUser(id, formValue.user).subscribe( data => {
-
-      this.ngOnInit();
       this.showOnlyTable = true;
       this.showUserForm = false;
+      this.ngOnInit();
      },
      error => {
+       debugger
       console.error(error);
      });
    }

@@ -24,6 +24,8 @@ import {
    HyperfluxHeaderComponent
   } from './nav/index';
 
+import { Error404Component } from '../app/common/errors/404.component';
+
 import {
   FieldListComponent,
   HyperFluxService,
@@ -68,7 +70,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RelayComponent,
     RelayListComponent,
     UserManagementComponent,
-    HyperfluxHeaderComponent
+    HyperfluxHeaderComponent,
+    Error404Component
   ],
   providers: [
     AuthenticationService,
