@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthenticationService, private router: Router){
     this.successMessage = this.router.getCurrentNavigation().extras.state?.message;
+    this.errorMessage = this.router.getCurrentNavigation().extras.state?.errorMessage;
   }
 
   ngOnInit(): void {

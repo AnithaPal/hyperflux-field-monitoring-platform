@@ -68,9 +68,10 @@ export class UserManagementComponent implements OnInit {
 
       joinedWithObject.subscribe(data => {
           this.team = data.team;
-          this.team.users = data.users;
-
-          this.collectionSize = this.team.users.length;
+          if (this.team){
+            this.team.users = data.users;
+            this.collectionSize = this.team.users.length;
+          }
       },
       error => {
         console.error(error);
