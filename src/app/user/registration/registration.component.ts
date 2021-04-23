@@ -41,7 +41,6 @@ export class RegistrationComponent implements OnInit {
         this.router.navigate(['login'], { state: { message: 'Your Registration is successful. Login here...' } });
       },
       error => {
-        console.error(error);
         if (error.error.message) {
           this.errorMessage = error.error.message;
         }

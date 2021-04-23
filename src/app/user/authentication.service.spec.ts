@@ -32,16 +32,16 @@ describe('AuthenticationService', () => {
       }
     };
     const user = {
-      'displayName': 'Test',
-      'email': 'test@test1.co',
-      'password': '$2b$10$t0WmuXjSdiA7xydsCHJDqegRL/44UzBvf94A/MTMkm4x4PfTOCds2',
-      'role': 'OWNER',
-      'team': 101,
-      'securityToken': null,
-      'securityTokenExpiration': null,
-      'id': 29,
-      'createdAt': '2021-04-08T17:48:09.039Z',
-      'updatedAt': '2021-04-08T17:48:09.039Z'
+      displayName: 'Test',
+      email: 'test@test1.co',
+      password: '$2b$10$t0WmuXjSdiA7xydsCHJDqegRL/44UzBvf94A/MTMkm4x4PfTOCds2',
+      role: 'OWNER',
+      team: 101,
+      securityToken: null,
+      securityTokenExpiration: null,
+      id: 29,
+      createdAt: '2021-04-08T17:48:09.039Z',
+      updatedAt: '2021-04-08T17:48:09.039Z'
     }
     authenticationService.registerUser(userData).subscribe(result => {
       expect(result.email).toBe('test@test1.co');

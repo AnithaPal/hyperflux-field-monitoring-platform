@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['fields']);
       },
       error => {
-        console.error(error);
         if (error.error.message ) {
           this.errorMessage = error.error.message;
         }

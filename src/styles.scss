@@ -18,6 +18,12 @@ a:active, a.hover {
   font-weight: bolder;
 }
 
+.action-div {
+  background-color: $gray-background;
+  padding: 20px 0;
+  margin: 2px;
+}
+
 .active-link {
   background-color: rgba(31, 143, 206, 0.3);
   color: $primary-color;

@@ -5,7 +5,7 @@ export interface IUser {
   password:	string;
   securityToken: string;
   securityTokenExpiration: Date;
-  team:	ITeam;
+  team:	number;
   role:	string;
   createdAt:	Date;
   updatedAt: Date;

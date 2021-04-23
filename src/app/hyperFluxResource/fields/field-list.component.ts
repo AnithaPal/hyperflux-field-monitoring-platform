@@ -24,7 +24,7 @@ export class FieldListComponent implements OnInit, OnDestroy  {
   showStatus = true;
   currentUser: IUser;
   owner: boolean;
-  teamId: ITeam;
+  teamId: number;
 
   fieldForm: FormGroup;
   connections: FormControl;

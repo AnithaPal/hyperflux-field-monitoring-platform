@@ -42,7 +42,7 @@ export class RelayListComponent implements  OnInit{
   pageSize = 10;
   collectionSize: number;
   owner: boolean;
-  teamId: ITeam;
+  teamId: number;
 
 
   constructor(private hyperFluxService: HyperFluxService,

@@ -16,7 +16,7 @@ describe('RegistrationComponent', () => {
       return of({});
     }
   }
-  const user ={
+  const userData = {
     team: {
       name: 'Team 6'
     },
@@ -26,6 +26,22 @@ describe('RegistrationComponent', () => {
       password: 'string12334'
     }
   };
+
+  const user =  {
+    id: 89,
+    displayName: 'aabb',
+    email: 'aa@bb.com',
+    password: '$2b$10$/fhod6/FxM1KccZ5qeCf7OdoCHP0BGeqQF0AUwxXPLTnlyNUFXlom',
+    role: 'OWNER',
+    team: 133,
+    createdAt: new Date('2021-04-23T14:42:07.122Z'),
+    securityToken: null,
+    securityTokenExpiration: null,
+    updatedAt: new Date('2021-04-23T14:42:07.122Z') ,
+  }
+
+
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
